@@ -1,6 +1,13 @@
 <template>
-  <div>
-    <h2>Council</h2>    
+  <div class="d-flex flex-column">
+    <h2>Council</h2> 
+    <div class="mb-auto">   
+      <AutomaScoreCards />
+    </div>
+    <div>
+      <!-- council rules -->
+      
+    </div>
     <div class="">
       <button type="button" class="btn btn-primary m-1" @click="endCouncil()">End Council</button>     
     </div>
@@ -8,9 +15,13 @@
 </template>
 
 <script>
+import AutomaScoreCards from './AutomaScoreCards.vue'
 export default {
   name: 'Council',
   props: {    
+  },
+  components: {
+    AutomaScoreCards,
   },
   data () {
     return {      

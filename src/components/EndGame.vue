@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import {difficulties} from '../assets/data'
+import {difficulties} from '../assets/data';
 export default {
   name: 'EndGame',
   props: {    

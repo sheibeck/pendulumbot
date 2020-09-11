@@ -25,18 +25,29 @@ const store = new Vuex.Store({
       difficulty: "B",
       deck: [],
       discard: [],
+      currentCard: 0,
+      automaTimerFlips: 0,
+      player: {
+        id: 0,
+        color: "blue",
+        score: 0,
+        votes: 0,
+      },
       automa1: {
+        id: 1,
         color: "orange",
         score: -22,
         votes: 0,
         grandeWorker: false,
       },
       automa2: {
+        id: 2,
         color: "white",
         score: -22,
         votes: 0,
         grandeWorker: false,
-      }
+      },
+      privelege: []
     },
     currentGame: {}
   },
@@ -59,6 +70,15 @@ const store = new Vuex.Store({
     discard (state, payload) {
       state.currentGame.discard = payload;
     },
+    currentCard (state, num) {
+      state.currentGame.currentCard = num;
+    },
+    privelege (state, priv) {
+      state.currentGame.privelege = priv;
+    },
+    automaTimerFlips (state) {
+      state.currentGame.automaTimerFlips++;
+    }
   },
   getters: {
     game : state => {
