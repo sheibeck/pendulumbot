@@ -27,6 +27,7 @@ const store = new Vuex.Store({
       discard: [],
       currentCard: 0,
       automaTimerFlips: 0,
+      purpleTimerFlips: 0,
       player: {
         id: 0,
         color: "blue",
@@ -78,6 +79,12 @@ const store = new Vuex.Store({
     },
     automaTimerFlips (state) {
       state.currentGame.automaTimerFlips++;
+    },
+    purpleTimerFlips (state) {
+      state.currentGame.purpleTimerFlips++;
+    },
+    setPurpleTimerFlips (state, num) {
+      state.currentGame.purpleTimerFlips = num;
     }
   },
   getters: {

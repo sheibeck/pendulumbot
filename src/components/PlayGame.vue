@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex flex-column">
-    <h4>Playing</h4>   
+    <h4>Playing <img src="../assets/purple-timer.png" />:{{purpleTimerFlips}}</h4>   
     <div class="d-flex flex-column mb-3">
       <button type="button" class="btn btn-secondary m-1" @click="drawCard()">You moved <img src="../assets/any-worker.png" /> from the bottom of an action space</button>
       <button type="button" class="btn btn-secondary m-1" @click="drawCard()">The <img src="../assets/purple-timer.png" /> timer is out and you flipped <img src="../assets/black-timer.png" /> or <img src="../assets/green-timer.png" /> </button>
       <div class="d-flex">
-        <button type="button" class="btn btn-dark m-1" @click="incrementAutomaTimerFlip()">You flipped <img src="../assets/purple-timer.png" /> </button>
-        <button type="button" class="btn btn-dark m-1" @click="incrementAutomaTimerFlip()">Automa flipped <img src="../assets/purple-timer.png" /> </button>
+        <button type="button" class="btn btn-dark m-1" @click="incrementTimerFlip(false)">You flipped <img src="../assets/purple-timer.png" /> </button>
+        <button type="button" class="btn btn-dark m-1" @click="incrementTimerFlip(true)">Automa flipped <img src="../assets/purple-timer.png" /> </button>
       </div>
     </div>
     
@@ -45,6 +45,9 @@ export default {
     },
     hasCurrentCard() {
       return this.$parent.currentCard > 0;
+    },
+    purpleTimerFlips() {
+      return this.$parent.game.purpleTimerFlips;
     }
   },
   data () {
@@ -56,8 +59,16 @@ export default {
     drawCard() {
       this.$parent.drawCard();
     },
-    incrementAutomaTimerFlip() {                  
-      this.$store.commit('automaTimerFlips');
+    incrementTimerFlip(flippedByAutoma) {
+      if (flippedByAutoma) {
+        this.$store.commit('automaTimerFlips');
+      }
+
+      this.$store.commit('purpleTimerFlips');
+
+      if (this.$parent.game.purpleTimerFlips == 4) {
+        this.$parent.startCouncil();
+      }
     }
   }
   

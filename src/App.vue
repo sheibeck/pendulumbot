@@ -58,6 +58,14 @@ export default {
         this.$store.commit('round', value);
       }
     },
+    purpleTimerFlips: {
+      get () {
+        return this.$store.state.currentGame.purpleTimerFlips;
+      },
+      set (value) {
+        this.$store.commit('purpleTimerFlips', value);
+      }
+    },
     game: {
       get () {
         return this.$store.state.currentGame;
@@ -132,6 +140,7 @@ export default {
     },
     nextRound() {
       let newRound = this.round + 1;
+      this.$store.commit('setPurpleTimerFlips', 0);
 
       if (newRound === 5) {
         this.togglePlaying();
@@ -140,6 +149,8 @@ export default {
       else {
         this.round = newRound;
       }
+
+      this.shuffleDeck();
     },
     startCouncil() {
       this.togglePlaying();
@@ -196,7 +207,7 @@ export default {
       this.deck = currentDeck;
     },
     shuffleDeck() {
-      //get the card ids
+      //TODO: during council, we might need to shuffle the remainder of the deck, but not the cards that we're using for scoring. Account for this
       this.deck = this.shuffle(this.automaDeck.map(a => a.id));
       this.discard = [];
     },
