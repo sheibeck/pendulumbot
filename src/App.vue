@@ -5,8 +5,8 @@
     </div>
 
     <!-- game state --> 
-    <div>
-      Round: {{this.round}}
+    <div class="container">
+      <Score />
     </div>
 
     <main role="main" class="container">
@@ -16,20 +16,20 @@
       <EndGame v-if="isEndGame" />
     </main>
      
-    <footer class='footer'>
-      <div class="container">       
-        <small>Built by Darktier Studios, LLC. Not an official Stonemaier Games project.</small>
-      </div>
+    <footer class='footer'>         
+        <small>Built by Darktier Studios, LLC.<br/>Not an official Stonemaier Games project.</small>      
     </footer>
 
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex"
 import GameSetup from './components/GameSetup.vue'
 import PlayGame from './components/PlayGame.vue'
 import Council from './components/Council.vue'
 import EndGame from './components/EndGame.vue'
+import Score from './components/Score.vue'
 
 export default {
   name: 'App',
@@ -38,20 +38,35 @@ export default {
     PlayGame,
     Council,
     EndGame,
+    Score,
+  },
+  created() {
+    this.newGame();
   },
   computed: {
+    ...mapGetters([
+      'defaultGame'
+    ]),
     round: {
       get () {
-        return this.$store.state.round
+        return this.$store.state.currentGame.round == undefined ? 0 : this.$store.state.currentGame.round;
       },
       set (value) {
-        this.$store.commit('round', value)
+        this.$store.commit('round', value);
+      }
+    },
+    game: {
+      get () {
+        return this.$store.state.currentGame;
+      },
+      set (value) {
+        this.$store.commit('game', value);
       }
     }
   },
   data () {
     return {
-      title: "Pendulum",      
+      title: "Pendulum",
       isSetup: true,
       isPlaying: false,
       isCouncil: false,
@@ -60,12 +75,15 @@ export default {
   },
   methods: {
     newGame() {
-      //TODO: reset the game state to it's default
-      this.round = 0;      
-      this.toggleEndGame();
-      this.toggleSetup();
+      //TODO: reset the game state to it's default      
+      this.game = JSON.parse(JSON.stringify(this.defaultGame));
+      if (!this.isSetup) {
+        this.toggleEndGame();
+        this.toggleSetup();
+      }
     },
     startGame() {
+      
       this.nextRound();
       this.toggleSetup();
       this.togglePlaying();
@@ -135,7 +153,8 @@ body {
   bottom: 0;
   width: 100%;
   height: 60px; /* Set the fixed height of the footer here */
-  line-height: 60px; /* Vertically center the text there */
-  background-color: #f5f5f5;
+  line-height: 12px; /* Vertically center the text there */
+  padding-top: 15px;
+  background-color: #f5f5f5;  
 }
 </style>

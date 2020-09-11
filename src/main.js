@@ -19,32 +19,53 @@ Vue.config.productionTip = false
 
 const store = new Vuex.Store({
   state: {
-    round: 0,
-    foreshadowing: false,
-    difficulty: "B",
-    automaPlayed: [],
-    automaRemaining: [],    
+    defaultGame: {
+      round: 0,
+      foreshadowing: false,
+      difficulty: "B",
+      deck: [],
+      discard: [],
+      automa1: {
+        color: "orange",
+        score: -22,
+        votes: 0,
+        grandeWorker: false,
+      },
+      automa2: {
+        color: "white",
+        score: -22,
+        votes: 0,
+        grandeWorker: false,
+      }
+    },
+    currentGame: {}
   },
-  mutations: { 
+  mutations: {
+    game (state, payload) {
+      state.currentGame = payload;
+    },
     round (state, num) {
-      state.round = num;
+      state.currentGame.round = num;
     },
     foreshadowing (state, bool) {
-      state.foreshadowing = bool;
+      state.currentGame.foreshadowing = bool;
     },
     difficulty (state, diff) {
-      state.difficulty = diff;
+      state.currentGame.difficulty = diff;
     },
-    automaPlayed (state, payload) {
-      state.automaPlayed = payload;
+    deck (state, payload) {
+      state.currentGame.deck = payload;
     },
-    automaRemaining (state, payload) {
-      state.automaRemaining = payload;
+    discard (state, payload) {
+      state.currentGame.discard = payload;
     },
   },
   getters: {
-    isSubscriber : state => {
-      return state.hasActiveSubscription;
+    game : state => {
+      return state.currentGame;
+    },
+    defaultGame : state => {
+      return state.defaultGame;
     },
   }
 });

@@ -29,7 +29,7 @@ export default {
   computed: {
     foreshadowing: {
       get () {
-        return this.$store.state.foreshadowing
+        return this.$store.state.currentGame.foreshadowing
       },
       set (value) {
         this.$store.commit('foreshadowing', value)
@@ -37,7 +37,7 @@ export default {
     },
     difficulty: {
       get () {
-        return this.$store.state.difficulty
+        return this.$store.state.currentGame.difficulty
       },
       set (value) {
         this.$store.commit('difficulty', value)
