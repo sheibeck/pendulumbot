@@ -1,12 +1,17 @@
 <template>
   <div>
     <h2>Game Setup</h2>
-    <div class="">
-       <div v-for="diff in difficulties" :key="diff.name">
-              <input type="radio" name="difficulty" :value="diff.name"> {{diff.name}}
+    <div class="d-flex align-items-start flex-column mx-4 mb-2">
+      <div v-for="diff in difficulties" :key="diff.id" class="py-2">
+        <input type="radio" v-model="difficulty" :id="'difficulty'+diff.id" name="difficulty" :value="diff.id">
+        <label class="ml-1" :for="'difficulty'+diff.id">{{diff.name}}</label>
+      </div>      
+      <div class="form-group form-check border-top border-light pt-3 w-100">
+        <input type="checkbox" class="form-check-input" id="foreshadowing" v-model="foreshadowing">
+        <label class="form-check-label" for="foreshadowing">Enable Foreshadowing?</label>  
       </div>
-      <button type="button" class="btn btn-primary m-1" @click="startGame()">Start Game</button>     
-    </div>    
+    </div>
+    <button type="button" class="btn btn-primary m-1" @click="startGame()">Start Game</button>
   </div>
 </template>
 
@@ -18,8 +23,26 @@ export default {
   },
   data () {
     return {  
-      difficulties: difficulties(),
+      difficulties: difficulties(),    
     } 
+  },  
+  computed: {
+    foreshadowing: {
+      get () {
+        return this.$store.state.foreshadowing
+      },
+      set (value) {
+        this.$store.commit('foreshadowing', value)
+      }
+    },
+    difficulty: {
+      get () {
+        return this.$store.state.difficulty
+      },
+      set (value) {
+        this.$store.commit('difficulty', value)
+      }
+    }
   },
   methods: {
     startGame() {

@@ -1,6 +1,7 @@
 export function difficulties() { return [
         {
-            "name": "A",
+            "id": "A",
+            "name": "The [Censored]",
             "details": 
             {
                 round1: {
@@ -22,7 +23,8 @@ export function difficulties() { return [
             }
         },
         {
-            "name": "B",
+            "id": "B",
+            "name": "The Underachiever",
             "details": 
             {
                 round1: {
@@ -44,7 +46,8 @@ export function difficulties() { return [
             }
         },
         {
-            "name": "C",
+            "id": "C",
+            "name": "The Average",
             "details": 
             {
                 round1: {
@@ -67,7 +70,8 @@ export function difficulties() { return [
         }
         ,
         {
-            "name": "D",
+            "id": "D",
+            "name": "The Slightly Intimidating",
             "details": 
             {
                 round1: {
@@ -90,7 +94,8 @@ export function difficulties() { return [
         }
         ,
         {
-            "name": "E",
+            "id": "E",
+            "name": "The Great",
             "details": 
             {
                 round1: {
@@ -113,7 +118,8 @@ export function difficulties() { return [
         }
         ,
         {
-            "name": "F",
+            "id": "F",
+            "name": "The Unconquered",
             "details": 
             {
                 round1: {

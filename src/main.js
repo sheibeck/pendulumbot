@@ -17,6 +17,39 @@ Vue.config.productionTip = false
 //const serviceWorker = new ServiceWorker();
 //serviceWorker.register('/service-worker.js', '/');
 
+const store = new Vuex.Store({
+  state: {
+    round: 0,
+    foreshadowing: false,
+    difficulty: "B",
+    automaPlayed: [],
+    automaRemaining: [],    
+  },
+  mutations: { 
+    round (state, num) {
+      state.round = num;
+    },
+    foreshadowing (state, bool) {
+      state.foreshadowing = bool;
+    },
+    difficulty (state, diff) {
+      state.difficulty = diff;
+    },
+    automaPlayed (state, payload) {
+      state.automaPlayed = payload;
+    },
+    automaRemaining (state, payload) {
+      state.automaRemaining = payload;
+    },
+  },
+  getters: {
+    isSubscriber : state => {
+      return state.hasActiveSubscription;
+    },
+  }
+});
+
 new Vue({
   render: h => h(App),
+  store: store,
 }).$mount('#app')

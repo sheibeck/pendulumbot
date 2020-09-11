@@ -6,7 +6,7 @@
 
     <!-- game state --> 
     <div>
-      Round: {{this.gameState.round}}
+      Round: {{this.round}}
     </div>
 
     <main role="main" class="container">
@@ -39,24 +39,29 @@ export default {
     Council,
     EndGame,
   },
+  computed: {
+    round: {
+      get () {
+        return this.$store.state.round
+      },
+      set (value) {
+        this.$store.commit('round', value)
+      }
+    }
+  },
   data () {
     return {
-      title: "Pendulum",
+      title: "Pendulum",      
       isSetup: true,
       isPlaying: false,
       isCouncil: false,
       isEndGame: false,
-      gameState: {
-        round: 0,
-        automaPlayed: [],
-        automaRemaining: [],
-      }
     }
   },
   methods: {
     newGame() {
       //TODO: reset the game state to it's default
-      this.gameState.round = 0;      
+      this.round = 0;      
       this.toggleEndGame();
       this.toggleSetup();
     },
@@ -66,14 +71,14 @@ export default {
       this.togglePlaying();
     },
     nextRound() {
-      let newRound = this.gameState.round + 1;
+      let newRound = this.round + 1;
 
       if (newRound === 5) {
         this.togglePlaying();
         this.toggleEndGame();
       }
       else {
-        this.gameState.round = newRound;
+        this.round = newRound;
       }
     },
     startCouncil() {
