@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pendulumbot-dev-83337-authRole",
+      "UnauthRoleArn": "arn:aws:iam::210120940769:role/amplify-pendulumbot-dev-83337-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::210120940769:role/amplify-pendulumbot-dev-83337-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-pendulumbot-dev-83337-deployment",
+      "UnauthRoleName": "amplify-pendulumbot-dev-83337-unauthRole",
+      "StackName": "amplify-pendulumbot-dev-83337",
+      "StackId": "arn:aws:cloudformation:us-east-1:210120940769:stack/amplify-pendulumbot-dev-83337/b0ad0020-f298-11ea-99e0-0e6115325dc3",
+      "AmplifyAppId": "d1x5u0te7u0u48"
+    }
+  }
+}
