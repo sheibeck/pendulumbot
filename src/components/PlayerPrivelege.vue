@@ -19,7 +19,7 @@ import { mapGetters } from "vuex"
 export default {
   name: 'PlayerPrivelege',
   props: {
-    player: Object
+    player: Number
   },
   computed: {
     ...mapGetters([
@@ -27,24 +27,24 @@ export default {
     ]),
     detail: {
       get() {
-        switch(this.player.id) {
+        switch(this.player) {
           case 1:
-            return this.game.player;
-          case 2:
             return this.game.automa1;
+          case 2:
+            return this.game.automa2;
           default:
-          return this.game.automa2;
+            return this.game.player;
         }
       },
       set(value) {
-        switch(this.player.id) {
+        switch(this.player) {
           case 1:
-            this.$store.commit('automa', value)
+            this.$store.commit('automa1', value)
             break;
           case 2:
-            this.$store.commit('automa', value)
+            this.$store.commit('automa2', value)
             break;
-          case 3:
+          default:
             this.$store.commit('player', value)
             break;
         }

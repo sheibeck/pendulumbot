@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="">
     <h4>Game Setup</h4>
-    <div class="d-flex align-items-start flex-column mx-4 mb-2">
+    <div class="d-flex align-items-center flex-column mx-4 mb-2">
       <div v-for="diff in difficulties" :key="diff.id" class="py-2">
         <input type="radio" v-model="difficulty" :id="'difficulty'+diff.id" name="difficulty" :value="diff.id">
         <label class="ml-1" :for="'difficulty'+diff.id">{{diff.name}}</label>

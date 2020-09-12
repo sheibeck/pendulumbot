@@ -33,6 +33,7 @@ import EndGame from './components/EndGame.vue'
 import Score from './components/Score.vue'
 import {deck} from './assets/data'
 import {difficulties} from './assets/data'
+//import _ from 'lodash';
 
 export default {
   name: 'App',
@@ -134,6 +135,14 @@ export default {
         this.$store.commit('setAutomaVotes', value);
       }
     },
+    playerVotes: {
+      get() {
+        return this.$store.state.currentGame.player.votes;
+      },
+      set(value) {
+        this.$store.commit('playerVotes', value);
+      }
+    },
     deckIsEmpty() {
       return this.game.deck.length == 0;
     }
@@ -153,25 +162,36 @@ export default {
     newGame() {
       //TODO: reset the game state to it's default      
       this.game = JSON.parse(JSON.stringify(this.defaultGame));
+      this.determinePrivelege(true);
+
       if (!this.isSetup) {
         this.toggleEndGame();
         this.toggleSetup();
-      }
-      else {
-        this.determinePrivelege(true);
-        this.shuffleDeck();
-      }
+      }      
     },
     startGame() {      
+      this.shuffleDeck();
+
       this.nextRound();
       this.toggleSetup();
       this.togglePlaying();
     },
-    nextRound() {
-      //set votes = 0;
+    nextRound() {   
+      //reset votes to 0
+      this.playerVotes = 0;   
+      this.setAutomaVotes = { automa1: { votes: 0 } , automa2: { votes: 0 } };
+
+      //get rid of any current cards in hand
       this.currentCard = 0;
+
+      //update the round number
       let newRound = this.round + 1;
-      this.$store.commit('setPurpleTimerFlips', 0);
+
+      //start by flipping the purple timer
+      this.$store.commit('setPurpleTimerFlips', 1);
+
+      //reset the number of times the automa has flipped the purple timer
+      this.$store.commit('resetAutomaTimerFlips');
 
       if (newRound === 5) {
         this.togglePlaying();
@@ -204,6 +224,9 @@ export default {
       this.setAutomaScoreCards = cards;
 
       this.scoreRound(this.round);
+
+      //do an initial determination in case the player never needs to change their votes
+      this.determinePrivelege(false);
     },
     scoreRound(roundNum) {
       let difficulty = this.difficulties.find(obj => {
@@ -262,12 +285,19 @@ export default {
     },
     determinePrivelege(isRandom) {
       if (isRandom) {
-        let privOrder = this.shuffle([this.game.automa1, this.game.automa2, this.game.player]);
-        this.privelege = privOrder;
+        let startPriv = this.shuffle([0,1,2]); //store the id of the player/autom
+        this.privelege = startPriv;
       }
-      else {
-        let privOrder = this.privelege.sort((a,b) => (a.votes > b.votes) ? 1 : ((b.votes > a.votes) ? -1 : 0)); 
-        this.privelege = privOrder;
+      else {        
+        //TODO: ties go to whichever was lower
+        let players = [{id:0, votes:this.game.player.votes}, {id:1, votes:this.game.automa1.votes}, {id:2, votes: this.game.automa2.votes}];
+        players.sort(function(a, b){
+            //var aVotes = a==0 ? _vmthis.game.player.votes : a==1 ? _vmthis.game.automa1.votes : _vmthis.game.automa2.votes;
+            //var bVotes = b==0 ? _vmthis.game.player.votes : b==1 ? _vmthis.game.automa1.votes : _vmthis.game.automa2.votes;
+            if (a.votes < b.votes || a.votes === b.votes) return 1;
+            return -1;
+        });        
+        this.privelege = [players[0].id, players[1].id, players[2].id];
       }
     },
     shuffle(array) {
@@ -293,16 +323,17 @@ export default {
       this.toggleCouncil();
       this.togglePlaying();
     },
-    drawCard() {     
-      if (this.deckIsEmpty) {
-        this.shuffleDeck();
-      }
-
+    drawCard() {  
       //discard the current card
       if (this.currentCard > 0) {
         let currentDiscard = Array.from(this.discard);
         currentDiscard.push(this.currentCard);
         this.discard = currentDiscard;
+      }
+
+      //shuffle the deck
+      if (this.deckIsEmpty) {
+        this.shuffleDeck();
       }
 
       //draw a new card
@@ -316,6 +347,10 @@ export default {
         this.deck = this.shuffle(this.automaDeck.map(a => a.id));
         this.discard = [];
         this.clearAutomaScoreCards;
+      }
+      else {
+        this.deck = this.shuffle(Array.from(this.discard));
+        this.discard = [];        
       }
     },
     togglePlaying() {
@@ -344,21 +379,20 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
-  margin-bottom: 60px;  
+  margin-bottom: 60px;
 }
 
 html {
   background-color: rgb(248, 236, 195);
   background-image: linear-gradient(rgb(248, 236, 195), rgb(252, 205, 103));  
-}
-html {
   position: relative;
   min-height: 100%;    
 }
 body {
   margin-bottom: 60px; /* Margin bottom by footer height */  
-  background-color: transparent !important;
+  background-color: transparent !important;  
 }
+
 .footer {
   position: absolute;
   bottom: 0;

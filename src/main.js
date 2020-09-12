@@ -68,7 +68,8 @@ const store = new Vuex.Store({
       state.currentGame.difficulty = diff;
     },
     deck (state, payload) {
-      state.currentGame.deck = payload;
+      //state.currentGame.deck = payload;
+      Vue.set(state.currentGame, 'deck', [...payload])
     },
     discard (state, payload) {
       state.currentGame.discard = payload;
@@ -77,10 +78,15 @@ const store = new Vuex.Store({
       state.currentGame.currentCard = num;
     },
     privelege (state, priv) {
-      state.currentGame.privelege = priv;
+      //state.currentGame.privelege = priv;
+      Vue.set(state.currentGame, 'privelege', []);
+      Vue.set(state.currentGame, 'privelege', [...priv]);
     },
     automaTimerFlips (state) {
       state.currentGame.automaTimerFlips++;
+    },
+    resetAutomaTimerFlips (state) {
+      state.currentGame.automaTimerFlips = 0;
     },
     purpleTimerFlips (state) {
       state.currentGame.purpleTimerFlips++;
@@ -88,13 +94,18 @@ const store = new Vuex.Store({
     setPurpleTimerFlips (state, num) {
       state.currentGame.purpleTimerFlips = num;
     },
-    clearAutomaScoreCards (state) {
-      state.currentGame.automa1.cards = [];
-      state.currentGame.automa2.cards = [];
+    clearAutomaScoreCards (state) {      
+      //state.currentGame.automa1.cards = [];
+      //state.currentGame.automa2.cards = [];
+      Vue.set(state.currentGame.automa1, 'cards', []);
+      Vue.set(state.currentGame.automa2, 'cards', []);
     },
     setAutomaScoreCards (state, payload ) {
-      state.currentGame.automa1.cards = payload.automa1;
-      state.currentGame.automa2.cards = payload.automa2;
+      //state.currentGame.automa1.cards = payload.automa1;
+      //state.currentGame.automa2.cards = payload.automa2;
+
+      Vue.set(state.currentGame.automa1, 'cards', [...payload.automa1]);
+      Vue.set(state.currentGame.automa2, 'cards', [...payload.automa2]);
     },
     setAutomaScore (state, payload) {
       state.currentGame.automa1.score += payload.automa1.score;
@@ -103,11 +114,17 @@ const store = new Vuex.Store({
     setAutomaVotes (state, payload) {
       state.currentGame.automa1.votes = payload.automa1.votes;
       state.currentGame.automa2.votes = payload.automa2.votes;
+    },
+    playerVotes (state, num) {
+      state.currentGame.player.votes = num;      
     }
   },
   getters: {
     game : state => {
       return state.currentGame;
+    },
+    privelege : state => {
+      return state.currentGame.privelege;
     },
     defaultGame : state => {
       return state.defaultGame;

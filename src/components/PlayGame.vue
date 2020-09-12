@@ -1,22 +1,22 @@
 <template>
-  <div class="d-flex flex-column">
+  <div class="d-flex flex-column align-items-center">
     <h4>Playing <img src="../assets/purple-timer.png" />:{{purpleTimerFlips}}</h4>   
     <div class="d-flex flex-column mb-3">
       <button type="button" class="btn btn-secondary m-1" @click="drawCard()">You moved <img src="../assets/any-worker.png" /> from the bottom of an action space</button>
       <button type="button" class="btn btn-secondary m-1" @click="drawCard()">The <img src="../assets/purple-timer.png" /> timer is out and you flipped <img src="../assets/black-timer.png" /> or <img src="../assets/green-timer.png" /> </button>
-      <div class="d-flex">
+      <div class="d-flex align-items-center">
         <button type="button" class="btn btn-dark m-1" @click="incrementTimerFlip(false)">You flipped <img src="../assets/purple-timer.png" /> </button>
         <button type="button" class="btn btn-dark m-1" @click="incrementTimerFlip(true)">Automa flipped <img src="../assets/purple-timer.png" /> </button>
       </div>
     </div>
     
     <!-- current action -->
-    <div v-if="hasCurrentCard" class="py-4 border border-dark d-flex justify-content-center">       
+    <div v-if="hasCurrentCard" class="action py-4 px-3 border border-dark d-flex justify-content-center">
         <img v-if="showCurrentAction.worker.purple" class="mx-2" src="../assets/purple-worker.png" />      
         <img v-if="showCurrentAction.worker.green" class="mx-2" src="../assets/green-worker.png" />      
         <img v-if="showCurrentAction.timer.purple" class="mx-2" src="../assets/purple-timer.png" />      
         <img v-if="showCurrentAction.timer.green" class="mx-2" src="../assets/green-timer.png" />      
-        <img v-if="showCurrentAction.timer.black" class="mx-2" src="../assets/black-timer.png" />                
+        <img v-if="showCurrentAction.timer.black" class="mx-2" src="../assets/black-timer.png" />                 
     </div>
     <div  v-if="hasCurrentCard">
       #{{showCurrentAction.id}}
@@ -83,5 +83,10 @@ export default {
   img {
     width: 30px;
     height: 30px;
+  }
+
+  .action {
+    min-width: 320px;
+    min-height: 100px;
   }
 </style>
