@@ -1,9 +1,8 @@
 <template>
   <div id="app">
     <div class="p-2 mt-0 bg-dark d-flex justify-content-between text-light">
-      <div>Pendulum Bot</div>
+      <div>Pendulum Bot <a class="text-light" href="">?</a></div>
       <div>Round: {{game.round}}</div>
-      <div><a class="text-light" href="">?</a></div>
     </div>
 
     <!-- game state --> 
@@ -103,7 +102,19 @@ export default {
         return this.$store.state.currentGame.privelege
       },
       set (value) {
-        this.$store.commit('privelege', value)
+        this.$store.commit('privelege', value);
+      }
+    },
+    clearAutomaScoreCards() {      
+        this.$store.commit('clearAutomaScoreCards');
+        return true;
+    },
+    setAutomaScoreCards: {
+      get() {
+        return true;
+      },
+      set(value) {
+        this.$store.commit('setAutomaScoreCards', value);
       }
     },
     deckIsEmpty() {
@@ -139,8 +150,10 @@ export default {
       this.togglePlaying();
     },
     nextRound() {
+      this.currentCard = 0;
       let newRound = this.round + 1;
       this.$store.commit('setPurpleTimerFlips', 0);
+
 
       if (newRound === 5) {
         this.togglePlaying();
@@ -150,11 +163,35 @@ export default {
         this.round = newRound;
       }
 
-      this.shuffleDeck();
+      this.shuffleDeck(true);
     },
     startCouncil() {
       this.togglePlaying();
-      this.toggleCouncil();      
+      this.toggleCouncil();
+
+      //make sure each automa has 3 cards
+      let cards = {
+        automa1: this.game.automa1.cards,
+        automa2: this.game.automa2.cards,
+      }
+
+      while (cards.automa1.length < 3) {
+        this.drawCardForAutoma(cards.automa1);
+      }
+
+      while (cards.automa2.length < 3) {
+        this.drawCardForAutoma(cards.automa2);
+      }
+
+      this.setAutomaScoreCards = cards;
+    },
+    drawCardForAutoma(objAutoma) {
+      if(this.deckIsEmpty) this.shuffleDeck();
+      //draw a new card out of the current deck
+      let currentDeck = Array.from(this.deck);
+      let drawnCard = currentDeck.pop();
+      objAutoma.push(drawnCard);
+      this.deck = currentDeck;
     },
     determinePrivelege(isRandom) {
       if (isRandom) {
@@ -206,10 +243,13 @@ export default {
       this.currentCard = currentDeck.pop();
       this.deck = currentDeck;
     },
-    shuffleDeck() {
+    shuffleDeck(reshuffleAllCards) {
       //TODO: during council, we might need to shuffle the remainder of the deck, but not the cards that we're using for scoring. Account for this
-      this.deck = this.shuffle(this.automaDeck.map(a => a.id));
-      this.discard = [];
+      if(reshuffleAllCards) {
+        this.deck = this.shuffle(this.automaDeck.map(a => a.id));
+        this.discard = [];
+        this.clearAutomaScoreCards;
+      }
     },
     togglePlaying() {
       this.isPlaying = !this.isPlaying;      

@@ -5,20 +5,20 @@ export function difficulties() { return [
             "details": 
             {
                 round1: {
-                    votes: -2,
-                    score: 0
+                    votes: -5,
+                    score: -3
                 },
                 round2: {
-                    votes: -2,
-                    score: 0
+                    votes: -4,
+                    score: -1
                 },
                 round3: {
-                    votes: -2,
-                    score: 0
+                    votes: -3,
+                    score: 2
                 },
                 round4: {
                     votes: -2,
-                    score: 0
+                    score: 6
                 },
             }
         },
@@ -29,19 +29,19 @@ export function difficulties() { return [
             {
                 round1: {
                     votes: -2,
-                    score: 0
+                    score: -2
                 },
                 round2: {
-                    votes: -2,
+                    votes: 0,
                     score: 0
                 },
                 round3: {
-                    votes: -2,
-                    score: 0
+                    votes: 2,
+                    score: 5
                 },
                 round4: {
-                    votes: -2,
-                    score: 0
+                    votes: 3,
+                    score: 10
                 },
             }
         },
@@ -51,20 +51,20 @@ export function difficulties() { return [
             "details": 
             {
                 round1: {
-                    votes: -2,
-                    score: 0
+                    votes: 0,
+                    score: -1
                 },
                 round2: {
-                    votes: -2,
-                    score: 0
+                    votes: 4,
+                    score: 2
                 },
                 round3: {
-                    votes: -2,
-                    score: 0
+                    votes: 8,
+                    score: 9
                 },
                 round4: {
-                    votes: -2,
-                    score: 0
+                    votes: 9,
+                    score: 17
                 },
             }
         }
@@ -75,20 +75,20 @@ export function difficulties() { return [
             "details": 
             {
                 round1: {
-                    votes: -2,
+                    votes: 1,
                     score: 0
                 },
                 round2: {
-                    votes: -2,
-                    score: 0
+                    votes: 5,
+                    score: 5
                 },
                 round3: {
-                    votes: -2,
-                    score: 0
+                    votes: 9,
+                    score: 10
                 },
                 round4: {
-                    votes: -2,
-                    score: 0
+                    votes: 10,
+                    score: 19
                 },
             }
         }
@@ -99,20 +99,20 @@ export function difficulties() { return [
             "details": 
             {
                 round1: {
-                    votes: -2,
-                    score: 0
+                    votes: 3,
+                    score: 3
                 },
                 round2: {
-                    votes: -2,
-                    score: 0
+                    votes: 7,
+                    score: 6
                 },
                 round3: {
-                    votes: -2,
-                    score: 0
+                    votes: 11,
+                    score: 12
                 },
                 round4: {
-                    votes: -2,
-                    score: 0
+                    votes: 13,
+                    score: 24
                 },
             }
         }
@@ -123,20 +123,20 @@ export function difficulties() { return [
             "details": 
             {
                 round1: {
-                    votes: -2,
-                    score: 0
+                    votes: 4,
+                    score: 5
                 },
                 round2: {
-                    votes: -2,
-                    score: 0
+                    votes: 7,
+                    score: 9
                 },
                 round3: {
-                    votes: -2,
-                    score: 0
+                    votes: 12,
+                    score: 17
                 },
                 round4: {
-                    votes: -2,
-                    score: 0
+                    votes: 13,
+                    score: 32
                 },
             }
         }
@@ -147,35 +147,35 @@ export function deck() { return [
         {
             id: 1,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
-                purple: true,
+                purple: false,
                 green: false,
                 black: false,
             },
             council: {
-                votes: 0,
+                votes: 4,
                 vp: 0,
-                cards: []
+                cards: ["grandeworker"]
             }
         },
         {
             id: 2,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
-                purple: true,
+                purple: false,
                 green: false,
                 black: false,
             },
             council: {
-                votes: 0,
+                votes: 3,
                 vp: 0,
-                cards: []
+                cards: ["grandeworker"]
             }
         },
         {
@@ -186,81 +186,82 @@ export function deck() { return [
             },
             timer: {
                 purple: true,
-                green: false,
+                green: true,
                 black: false,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: 1,
+                vp: 1,
+                cards: ["GrandeWorker"]
             }
         },
         {
             id: 4,
             worker: {
-                purple: true,
-                green: false,
+                purple: false,
+                green: true,
             },
             timer: {
                 purple: true,
                 green: false,
-                black: false,
+                black: true,
             },
             council: {
-                votes: 0,
+                votes: 2,
                 vp: 0,
-                cards: []
+                cards: ["2-MilitaryCulture-TakeWorkerFromTimerRow"]
             }
         },
         {
             id: 5,
+            province: 1,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
-                purple: true,
+                purple: false,
                 green: false,
                 black: false,
             },
             council: {
-                votes: 0,
+                votes: 2,
                 vp: 0,
-                cards: []
+                cards: ["2-MilitaryCulture-TakeWorkerFromTimerRow"]
             }
         },
         {
             id: 6,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
                 purple: true,
                 green: false,
-                black: false,
+                black: true,
             },
             council: {
-                votes: 0,
+                votes: 3,
                 vp: 0,
-                cards: []
+                cards: ["2-MilitaryCulture-TakeWorkerFromTimerRow"]
             }
         },
         {
             id: 7,
             worker: {
-                purple: true,
-                green: false,
+                purple: false,
+                green: true,
             },
             timer: {
-                purple: true,
+                purple: false,
                 green: false,
                 black: false,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: -1,
+                vp: 2,
+                cards: ["ExtraProvince"]
             }
         },
         {
@@ -270,48 +271,49 @@ export function deck() { return [
                 green: false,
             },
             timer: {
-                purple: true,
+                purple: false,
                 green: false,
                 black: false,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: 2,
+                vp: 1,
+                cards: ["2-MilitaryCulture-TakeWorkerFromTimerRow"]
             }
         },
         {
             id: 9,
+            province: 2,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
-                purple: true,
+                purple: false,
                 green: false,
                 black: false,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: 3,
+                vp: 1,
+                cards: ["3-Military-2Votes-GainProvince"]
             }
         },
         {
             id: 10,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
-                purple: true,
+                purple: false,
                 green: false,
                 black: false,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: 1,
+                vp: 1,
+                cards: ["GrandeWorker"]
             }
         },
         {
@@ -323,80 +325,81 @@ export function deck() { return [
             timer: {
                 purple: true,
                 green: false,
-                black: false,
+                black: true,
             },
             council: {
-                votes: 0,
+                votes: 4,
                 vp: 0,
-                cards: []
+                cards: ["GrandeWorker"]
             }
         },
         {
             id: 12,
             worker: {
-                purple: true,
-                green: false,
+                purple: false,
+                green: true,
             },
             timer: {
-                purple: true,
+                purple: false,
                 green: false,
                 black: false,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: 2,
+                vp: 1,
+                cards: ["GrandeWorker"]
             }
         },
         {
             id: 13,
+            province: 3,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
-                purple: true,
+                purple: false,
                 green: false,
                 black: false,
             },
             council: {
                 votes: 0,
-                vp: 0,
-                cards: []
+                vp: 2,
+                cards: ["ExtraProvince"]
             }
         },
         {
             id: 14,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
                 purple: true,
-                green: false,
+                green: true,
                 black: false,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: 1,
+                vp: 1,
+                cards: ["2-Money-YellowVictory"]
             }
         },
         {
             id: 15,
             worker: {
-                purple: true,
-                green: false,
+                purple: false,
+                green: true,
             },
             timer: {
-                purple: true,
+                purple: false,
                 green: false,
                 black: false,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: 1,
+                vp: 1,
+                cards: ["3-Military-2Votes-GainProvince"]
             }
         },
         {
@@ -408,114 +411,115 @@ export function deck() { return [
             timer: {
                 purple: true,
                 green: false,
-                black: false,
+                black: true,
             },
             council: {
-                votes: 0,
+                votes: 2,
                 vp: 0,
-                cards: []
+                cards: ["GrandeWorker"]
             }
         },
         {
             id: 17,
+            province: 4,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
-                purple: true,
+                purple: false,
                 green: false,
                 black: false,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: 2,
+                vp: 1,
+                cards: ["GrandeWorker"]
             }
         },
         {
             id: 18,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
-                purple: true,
+                purple: false,
                 green: false,
                 black: false,
             },
             council: {
                 votes: 0,
-                vp: 0,
-                cards: []
+                vp: 2,
+                cards: ["GrandeWorker"]
             }
         },
         {
             id: 19,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
                 purple: true,
-                green: false,
+                green: true,
                 black: false,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: -1,
+                vp: 2,
+                cards: ["2-MilitaryCulture-TakeWorkerFromTimerRow"]
             }
         },
         {
             id: 20,
             worker: {
-                purple: true,
-                green: false,
+                purple: false,
+                green: true,
             },
             timer: {
-                purple: true,
+                purple: false,
                 green: false,
                 black: false,
             },
             council: {
                 votes: 0,
-                vp: 0,
-                cards: []
+                vp: 2,
+                cards: ["2-MilitaryCulture-TakeWorkerFromTimerRow"]
             }
         },
         {
             id: 21,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
-                purple: true,
+                purple: false,
                 green: false,
                 black: false,
             },
             council: {
                 votes: 0,
-                vp: 0,
-                cards: []
+                vp: 2,
+                cards: ["2-MilitaryCulture-TakeWorkerFromTimerRow"]
             }
         },
         {
             id: 22,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
-                purple: true,
+                purple: false,
                 green: false,
                 black: false,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: 2,
+                vp: 1,
+                cards: ["ExtraProvince"]
             }
         },
         {
@@ -525,65 +529,65 @@ export function deck() { return [
                 green: false,
             },
             timer: {
-                purple: true,
+                purple: false,
                 green: false,
                 black: false,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: 1,
+                vp: 2,
+                cards: ["2-Money-YellowVictory"]
             }
         },
         {
             id: 24,
             worker: {
-                purple: true,
-                green: false,
+                purple: false,
+                green: true,
             },
             timer: {
                 purple: true,
                 green: false,
-                black: false,
+                black: true,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: 1,
+                vp: 2,
+                cards: ["3-Military-2Votes-GainProvince"]
             }
         },
         {
             id: 25,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
                 purple: true,
                 green: false,
-                black: false,
+                black: true,
             },
             council: {
                 votes: 0,
-                vp: 0,
-                cards: []
+                vp: 2,
+                cards: ["GrandeWorker"]
             }
         },
         {
             id: 26,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
                 purple: true,
-                green: false,
+                green: true,
                 black: false,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: -1,
+                vp: 2,
+                cards: ["GrandeWorker"]
             }
         },
         {
@@ -595,63 +599,63 @@ export function deck() { return [
             timer: {
                 purple: true,
                 green: false,
-                black: false,
+                black: true,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: 1,
+                vp: 1,
+                cards: ["GrandeWorker"]
             }
         },
         {
             id: 28,
             worker: {
-                purple: true,
-                green: false,
+                purple: false,
+                green: true,
             },
             timer: {
                 purple: true,
-                green: false,
+                green: true,
                 black: false,
             },
             council: {
                 votes: 0,
-                vp: 0,
-                cards: []
+                vp: 1,
+                cards: ["ExtraProvince"]
             }
         },
         {
             id: 29,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
                 purple: true,
                 green: false,
-                black: false,
+                black: true,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: 1,
+                vp: 2,
+                cards: ["2-Money-YellowVictory"]
             }
         },
         {
             id: 30,
             worker: {
-                purple: true,
+                purple: false,
                 green: false,
             },
             timer: {
                 purple: true,
                 green: false,
-                black: false,
+                black: true,
             },
             council: {
-                votes: 0,
+                votes: 2,
                 vp: 0,
-                cards: []
+                cards: ["3-Military-2Votes-GainProvince"]
             }
         },
         {
@@ -662,30 +666,30 @@ export function deck() { return [
             },
             timer: {
                 purple: true,
-                green: false,
+                green: true,
                 black: false,
             },
             council: {
-                votes: 0,
-                vp: 0,
-                cards: []
+                votes: 3,
+                vp: 1,
+                cards: ["2-Money-YellowVictory"]
             }
         },
         {
             id: 32,
             worker: {
-                purple: true,
-                green: false,
+                purple: false,
+                green: true,
             },
             timer: {
                 purple: true,
-                green: false,
+                green: true,
                 black: false,
             },
             council: {
-                votes: 0,
+                votes: 4,
                 vp: 0,
-                cards: []
+                cards: ["3-Military-2Votes-GainProvince"]
             }
         },
     ]

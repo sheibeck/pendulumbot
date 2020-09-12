@@ -2,10 +2,10 @@
   <div>
     <h4>Automa Score Cards</h4>
     <div class="">
-      automa 1 cards
+      {{automa1ScoreCards}}
     </div>
     <div class="">
-      automa 2 cards
+      {{automa2ScoreCards}}
     </div>
   </div>
 </template>
@@ -19,7 +19,13 @@ export default {
     return {      
     }
   },
-  methods: {    
+  computed: {
+    automa1ScoreCards() {
+      return this.$store.state.currentGame.automa1.cards;
+    },
+    automa2ScoreCards() {
+      return this.$store.state.currentGame.automa2.cards;
+    }
   }
 }
 </script>

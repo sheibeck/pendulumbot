@@ -40,6 +40,7 @@ const store = new Vuex.Store({
         score: -22,
         votes: 0,
         grandeWorker: false,
+        cards: []
       },
       automa2: {
         id: 2,
@@ -47,6 +48,7 @@ const store = new Vuex.Store({
         score: -22,
         votes: 0,
         grandeWorker: false,
+        cards: []
       },
       privelege: []
     },
@@ -85,6 +87,14 @@ const store = new Vuex.Store({
     },
     setPurpleTimerFlips (state, num) {
       state.currentGame.purpleTimerFlips = num;
+    },
+    clearAutomaScoreCards (state) {
+      state.currentGame.automa1.cards = [];
+      state.currentGame.automa2.cards = [];
+    },
+    setAutomaScoreCards (state, payload ) {
+      state.currentGame.automa1.cards = payload.automa1;
+      state.currentGame.automa2.cards = payload.automa2;
     }
   },
   getters: {

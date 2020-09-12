@@ -16,7 +16,10 @@
         <img v-if="showCurrentAction.worker.green" class="mx-2" src="../assets/green-worker.png" />      
         <img v-if="showCurrentAction.timer.purple" class="mx-2" src="../assets/purple-timer.png" />      
         <img v-if="showCurrentAction.timer.green" class="mx-2" src="../assets/green-timer.png" />      
-        <img v-if="showCurrentAction.timer.black" class="mx-2" src="../assets/black-timer.png" />        
+        <img v-if="showCurrentAction.timer.black" class="mx-2" src="../assets/black-timer.png" />                
+    </div>
+    <div  v-if="hasCurrentCard">
+      #{{showCurrentAction.id}}
     </div>
 
     <AutomaScoreCards v-if="1==2" />    
