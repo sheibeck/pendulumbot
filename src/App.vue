@@ -2,7 +2,7 @@
   <div id="app">
     <div class="p-2 mt-0 bg-dark d-flex justify-content-between text-light">
       <div>Pendulum Bot <a class="text-light" href="">?</a></div>
-      <div>Round: {{game.round}}</div>
+      <div>Round: {{round}}</div>
     </div>
 
     <!-- game state --> 
@@ -32,6 +32,7 @@ import Council from './components/Council.vue'
 import EndGame from './components/EndGame.vue'
 import Score from './components/Score.vue'
 import {deck} from './assets/data'
+import {difficulties} from './assets/data'
 
 export default {
   name: 'App',
@@ -117,6 +118,22 @@ export default {
         this.$store.commit('setAutomaScoreCards', value);
       }
     },
+    setAutomaScore: {
+      get() {
+        return true;
+      },
+      set(value) {
+        this.$store.commit('setAutomaScore', value);
+      }
+    },
+    setAutomaVotes: {
+      get() {
+        return true;
+      },
+      set(value) {
+        this.$store.commit('setAutomaVotes', value);
+      }
+    },
     deckIsEmpty() {
       return this.game.deck.length == 0;
     }
@@ -129,6 +146,7 @@ export default {
       isCouncil: false,
       isEndGame: false,
       automaDeck: deck(),
+      difficulties: difficulties(),
     }
   },
   methods: {
@@ -150,10 +168,10 @@ export default {
       this.togglePlaying();
     },
     nextRound() {
+      //set votes = 0;
       this.currentCard = 0;
       let newRound = this.round + 1;
       this.$store.commit('setPurpleTimerFlips', 0);
-
 
       if (newRound === 5) {
         this.togglePlaying();
@@ -184,6 +202,50 @@ export default {
       }
 
       this.setAutomaScoreCards = cards;
+
+      this.scoreRound(this.round);
+    },
+    scoreRound(roundNum) {
+      let difficulty = this.difficulties.find(obj => {
+          return obj.id === this.game.difficulty;
+        });
+      
+      if (!difficulty) return;
+
+      let diffScore = eval(`difficulty.details.round${roundNum}.score`);
+      let diffVotes = eval(`difficulty.details.round${roundNum}.votes`);
+
+      let scores = {
+        automa1: { score: 0, votes: 0 },
+        automa2: { score: 0, votes: 0 },
+      }  
+
+      //automa 1
+      this.game.automa1.cards.forEach( (element) =>
+        {
+          let card = this.getCardDetails(element);
+          scores.automa1.score += card.council.vp;
+          scores.automa1.votes += card.council.votes;
+        }
+      );
+      scores.automa1.votes += this.game.automaTimerFlips + diffVotes;
+      scores.automa1.score += diffScore;
+      //count points for privelege;
+      
+      //automa 2
+      this.game.automa2.cards.forEach( (element) =>
+        {
+          let card = this.getCardDetails(element);
+          scores.automa2.score += card.council.vp;
+          scores.automa2.votes += card.council.votes;
+        }
+      );
+      scores.automa2.votes += this.game.automaTimerFlips + diffVotes;
+      scores.automa2.score += diffScore;
+      //count points for privelege
+
+      this.setAutomaScore = scores;
+      this.setAutomaVotes = scores;
     },
     drawCardForAutoma(objAutoma) {
       if(this.deckIsEmpty) this.shuffleDeck();
@@ -192,6 +254,11 @@ export default {
       let drawnCard = currentDeck.pop();
       objAutoma.push(drawnCard);
       this.deck = currentDeck;
+    },
+    getCardDetails(cardNum) {
+      return this.automaDeck.find(obj => {
+          return obj.id === cardNum;
+        });
     },
     determinePrivelege(isRandom) {
       if (isRandom) {

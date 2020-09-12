@@ -95,6 +95,14 @@ const store = new Vuex.Store({
     setAutomaScoreCards (state, payload ) {
       state.currentGame.automa1.cards = payload.automa1;
       state.currentGame.automa2.cards = payload.automa2;
+    },
+    setAutomaScore (state, payload) {
+      state.currentGame.automa1.score += payload.automa1.score;
+      state.currentGame.automa2.score += payload.automa2.score;
+    },
+    setAutomaVotes (state, payload) {
+      state.currentGame.automa1.votes = payload.automa1.votes;
+      state.currentGame.automa2.votes = payload.automa2.votes;
     }
   },
   getters: {
