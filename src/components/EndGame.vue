@@ -2,7 +2,7 @@
   <div>
     <h2>End Game</h2>
     <div class="">      
-      <button type="button" class="btn btn-primary m-1" @click="newGame()">New Game</button>     
+      <button type="button" class="btn btn-primary m-1 w-100" @click="newGame()">New Game</button>     
     </div>    
   </div>
 </template>

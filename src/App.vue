@@ -253,8 +253,8 @@ export default {
       );
       scores.automa1.votes += this.game.automaTimerFlips + diffVotes;
       scores.automa1.score += diffScore;
-      //count points for privelege;
-      
+      //count points for privelege in endCouncil
+            
       //automa 2
       this.game.automa2.cards.forEach( (element) =>
         {
@@ -319,6 +319,12 @@ export default {
       return array;
     },
     endCouncil() {
+      //updating score based on privelege
+      if (this.game.privelege[0] == 1) this.game.automa1.score += 2;
+      if (this.game.privelege[0] == 2) this.game.automa2.score += 2;
+      if (this.game.privelege[1] == 1) this.game.automa1.score += 1;
+      if (this.game.privelege[1] == 2) this.game.automa2.score += 1;
+
       this.nextRound();
       this.toggleCouncil();
       this.togglePlaying();
@@ -342,7 +348,7 @@ export default {
       this.deck = currentDeck;
     },
     shuffleDeck(reshuffleAllCards) {
-      //TODO: during council, we might need to shuffle the remainder of the deck, but not the cards that we're using for scoring. Account for this
+      //during council, we might need to shuffle the remainder of the deck, but not the cards that we're using for scoring.
       if(reshuffleAllCards) {
         this.deck = this.shuffle(this.automaDeck.map(a => a.id));
         this.discard = [];

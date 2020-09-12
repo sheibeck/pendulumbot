@@ -1,25 +1,27 @@
 <template> 
   <div class="">
     <div class="mr-1" v-if="!isEditing">
-      <svg width="20" height="20">
-        <rect width="20" height="20" :style="'fill:' + detail.color +';stroke-width:3;stroke:rgb(0,0,0)'" />
-      </svg>
+      <AutomaColor :id="player" /> <span>{{getPlayerLabel}}</span>
     </div>
     <div class="mr-1" v-if="isEditing">
         COLOR PICKER
     </div>
     <div class="p-0 m-0">
-      <img src="../assets/vp.png" />{{detail.score}}<img src="../assets/votes.png" />{{detail.votes}}
+      <span v-if="detail.id != 0"><img src="../assets/vp.png" />{{detail.score}}</span><img src="../assets/votes.png" />{{detail.votes}}      
     </div>
   </div>    
 </template>
 
 <script>
 import { mapGetters } from "vuex"
+import AutomaColor from './AutomaColor.vue'
 export default {
   name: 'PlayerPrivelege',
   props: {
     player: Number
+  },
+  components: {    
+    AutomaColor
   },
   computed: {
     ...mapGetters([
@@ -49,6 +51,9 @@ export default {
             break;
         }
       }      
+    },
+    getPlayerLabel() {
+      return this.detail.id == 0 ? "You" : this.detail.id;
     }
   },
   data () {
@@ -61,7 +66,7 @@ export default {
       if (this.automa == 1) {
         this.detail = {};
       }
-    }
+    }    
   }
 }
 </script>

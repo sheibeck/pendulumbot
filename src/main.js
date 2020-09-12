@@ -117,6 +117,9 @@ const store = new Vuex.Store({
     },
     playerVotes (state, num) {
       state.currentGame.player.votes = num;      
+    },
+    playerScore (state, num) {
+      state.currentGame.player.score = num;      
     }
   },
   getters: {
