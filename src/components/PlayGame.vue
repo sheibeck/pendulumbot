@@ -2,57 +2,36 @@
   <div class="d-flex flex-column align-items-center">
     <h4>Playing <img src="../assets/purple-timer.png" />:{{purpleTimerFlips}}</h4>   
     <div class="d-flex flex-column mb-3">
-      <button type="button" class="btn btn-secondary m-1 w-100" @click="drawCard()">You moved <img src="../assets/any-worker.png" /> from the bottom of an action space</button>
-      <button type="button" class="btn btn-secondary m-1 w-100" @click="drawCard()">The <img src="../assets/purple-timer.png" /> timer is out and you flipped <img src="../assets/black-timer.png" /> or <img src="../assets/green-timer.png" /> </button>
+      <button type="button" class="btn btn-secondary m-1" @click="drawCard()">You moved <img src="../assets/any-worker.png" /> from the bottom of an action space</button>
+      <button type="button" class="btn btn-secondary m-1" @click="drawCard()">The <img src="../assets/purple-timer.png" /> timer is out and you flipped <img src="../assets/black-timer.png" /> or <img src="../assets/green-timer.png" /> </button>
       <div class="d-flex justify-content-between">
         <button type="button" class="btn btn-dark m-1 w-100" @click="incrementTimerFlip(false)">You flipped <img src="../assets/purple-timer.png" /> </button>
         <button type="button" class="btn btn-dark m-1 w-100" @click="incrementTimerFlip(true)">Automa flipped <img src="../assets/purple-timer.png" /> </button>
       </div>
     </div>
     
-    <!-- current action -->
-    <div v-if="hasCurrentCard" class="action pt-4 pb-2 px-3 border border-dark d-flex flex-column w-100">
-      <div class="d-flex justify-content-center ">
-        <img v-if="showCurrentAction.worker.purple" class="mx-2" src="../assets/purple-worker.png" />      
-        <img v-if="showCurrentAction.worker.green" class="mx-2" src="../assets/green-worker.png" />      
-        <img v-if="showCurrentAction.timer.purple" class="mx-2" src="../assets/purple-timer.png" />      
-        <img v-if="showCurrentAction.timer.green" class="mx-2" src="../assets/green-timer.png" />      
-        <img v-if="showCurrentAction.timer.black" class="mx-2" src="../assets/black-timer.png" />  
-      </div>
-      <div class="text-right">#{{showCurrentAction.id}}</div>
-    </div>
+    <AutomaCard :council="false" />
     
     <div v-if="purpleTimerFlips >= 2" class="mt-4">
       Remove the <img class="mx-2" src="../assets/legendary-achievement.png" /> achievement!
     </div>
-
-    <AutomaScoreCards v-if="1==2" />    
+         
+    <AutomaScoreCards v-if="1==2" />
   </div>
 </template>
 
 <script>
 import AutomaScoreCards from './AutomaScoreCards.vue'
+import AutomaCard from './AutomaCard.vue'
 export default {
   name: 'PlayGame',
   props: {   
   },
   components: {
     AutomaScoreCards,
+    AutomaCard
   },
-  computed: {
-    showCurrentAction() {
-      let currentCard = this.$parent.currentCard;
-      if (this.hasCurrentCard) {
-        return this.$parent.automaDeck.find(obj => {
-          return obj.id === currentCard;
-        });
-      } else {
-        return null;
-      }
-    },
-    hasCurrentCard() {
-      return this.$parent.currentCard > 0;
-    },
+  computed: {    
     purpleTimerFlips() {
       return this.$parent.game.purpleTimerFlips;
     }

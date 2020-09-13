@@ -7,6 +7,8 @@ import 'es6-promise/auto'; //vuex dependency
 import Vuex from 'vuex';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import {deck} from './assets/data'
+import {difficulties} from './assets/data'
 
 Amplify.configure(aws_exports);
 Vue.use(Vuex)
@@ -19,6 +21,8 @@ Vue.config.productionTip = false
 
 const store = new Vuex.Store({
   state: {
+    automaDeck: deck(),
+    difficulties: difficulties(),
     defaultGame: {
       round: 0,
       foreshadowing: false,
@@ -78,8 +82,7 @@ const store = new Vuex.Store({
       state.currentGame.currentCard = num;
     },
     privelege (state, priv) {
-      //state.currentGame.privelege = priv;
-      Vue.set(state.currentGame, 'privelege', []);
+      //state.currentGame.privelege = priv;      
       Vue.set(state.currentGame, 'privelege', [...priv]);
     },
     automaTimerFlips (state) {
@@ -95,10 +98,8 @@ const store = new Vuex.Store({
       state.currentGame.purpleTimerFlips = num;
     },
     clearAutomaScoreCards (state) {      
-      //state.currentGame.automa1.cards = [];
-      //state.currentGame.automa2.cards = [];
-      Vue.set(state.currentGame.automa1, 'cards', []);
-      Vue.set(state.currentGame.automa2, 'cards', []);
+      state.currentGame.automa1.cards = [];
+      state.currentGame.automa2.cards = [];      
     },
     setAutomaScoreCards (state, payload ) {
       //state.currentGame.automa1.cards = payload.automa1;
@@ -132,6 +133,12 @@ const store = new Vuex.Store({
     defaultGame : state => {
       return state.defaultGame;
     },
+    automaDeck: state => {
+      return state.automaDeck;
+    },
+    difficulties: state => {
+      return state.difficulties;
+    }
   }
 });
 

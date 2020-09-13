@@ -31,9 +31,6 @@ import PlayGame from './components/PlayGame.vue'
 import Council from './components/Council.vue'
 import EndGame from './components/EndGame.vue'
 import Score from './components/Score.vue'
-import {deck} from './assets/data'
-import {difficulties} from './assets/data'
-//import _ from 'lodash';
 
 export default {
   name: 'App',
@@ -49,7 +46,9 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'defaultGame'
+      'defaultGame',
+      'automaDeck',
+      'difficulties'
     ]),
     round: {
       get () {
@@ -107,9 +106,13 @@ export default {
         this.$store.commit('privelege', value);
       }
     },
-    clearAutomaScoreCards() {      
-        this.$store.commit('clearAutomaScoreCards');
+    clearAutomaScoreCards: {  
+      get() {
         return true;
+      },
+      set() {    
+        this.$store.commit('clearAutomaScoreCards',);        
+      }
     },
     setAutomaScoreCards: {
       get() {
@@ -153,9 +156,7 @@ export default {
       isSetup: true,
       isPlaying: false,
       isCouncil: false,
-      isEndGame: false,
-      automaDeck: deck(),
-      difficulties: difficulties(),
+      isEndGame: false      
     }
   },
   methods: {
@@ -169,9 +170,7 @@ export default {
         this.toggleSetup();
       }      
     },
-    startGame() {      
-      this.shuffleDeck();
-
+    startGame() {     
       this.nextRound();
       this.toggleSetup();
       this.togglePlaying();
@@ -182,7 +181,7 @@ export default {
       this.setAutomaVotes = { automa1: { votes: 0 } , automa2: { votes: 0 } };
 
       //get rid of any current cards in hand
-      this.currentCard = 0;
+      this.discardCurrentCard()
 
       //update the round number
       let newRound = this.round + 1;
@@ -206,6 +205,8 @@ export default {
     startCouncil() {
       this.togglePlaying();
       this.toggleCouncil();
+
+      this.discardCurrentCard();
 
       //make sure each automa has 3 cards
       let cards = {
@@ -273,7 +274,7 @@ export default {
     drawCardForAutoma(objAutoma) {
       if(this.deckIsEmpty) this.shuffleDeck();
       //draw a new card out of the current deck
-      let currentDeck = Array.from(this.deck);
+      let currentDeck = [...this.deck];
       let drawnCard = currentDeck.pop();
       objAutoma.push(drawnCard);
       this.deck = currentDeck;
@@ -330,12 +331,7 @@ export default {
       this.togglePlaying();
     },
     drawCard() {  
-      //discard the current card
-      if (this.currentCard > 0) {
-        let currentDiscard = Array.from(this.discard);
-        currentDiscard.push(this.currentCard);
-        this.discard = currentDiscard;
-      }
+      this.discardCurrentCard()
 
       //shuffle the deck
       if (this.deckIsEmpty) {
@@ -343,19 +339,30 @@ export default {
       }
 
       //draw a new card
-      let currentDeck = Array.from(this.deck);
+      let currentDeck = [...this.deck];
       this.currentCard = currentDeck.pop();
       this.deck = currentDeck;
+    },
+    discardCurrentCard() {
+      //discard the current card
+      if (this.currentCard > 0) {
+        let currentDiscard = [...this.discard];
+        currentDiscard.push(this.currentCard);
+        this.discard = currentDiscard;
+        this.currentCard = 0;
+      }
     },
     shuffleDeck(reshuffleAllCards) {
       //during council, we might need to shuffle the remainder of the deck, but not the cards that we're using for scoring.
       if(reshuffleAllCards) {
         this.deck = this.shuffle(this.automaDeck.map(a => a.id));
         this.discard = [];
-        this.clearAutomaScoreCards;
+        //this.clearAutomaScoreCards;
+        this.$store.state.currentGame.automa1.cards = [];
+        this.$store.state.currentGame.automa2.cards = []; 
       }
       else {
-        this.deck = this.shuffle(Array.from(this.discard));
+        this.deck = this.shuffle([...this.discard]);
         this.discard = [];        
       }
     },

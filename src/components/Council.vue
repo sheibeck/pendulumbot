@@ -20,6 +20,7 @@
     <div class="mt-3">
       <!--TODO: Show the worker movement actions based on which card you drew -->
       <button type="button" class="btn btn-secondary m-1 w-100" @click="drawCard()">You moved <img src="../assets/any-worker.png" /> from the bottom of an action space</button>
+      <AutomaCard :council="true" />
       <button type="button" class="btn btn-primary m-1 w-100" @click="endCouncil()">End Council</button>     
     </div>
   </div>
@@ -28,13 +29,15 @@
 <script>
 import AutomaScoreCards from './AutomaScoreCards.vue'
 import AutomaColor from './AutomaColor.vue'
+import AutomaCard from './AutomaCard.vue'
 export default {
   name: 'Council',
   props: {    
   },
   components: {
     AutomaScoreCards,
-    AutomaColor
+    AutomaColor,
+    AutomaCard
   },
   data () {
     return {    
