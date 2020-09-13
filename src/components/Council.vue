@@ -5,7 +5,13 @@
       Enter your votes: <input type="number" v-model="playerVotes" class="text-center" style="width: 50px;" @change="updatePrivelege()" />      
     </div>    
     <div class="mt-4">
-      <AutomaScoreCards />
+      <AutomaScoreCards v-if="game.round < 4" />
+      <div v-if="game.round == 4">
+        1. If you don’t have the legendary achievement victory point and the corresponding reward card is available, the Automa takes it.<br/>
+        2. Otherwise, among the remaining council rewards, the Automa takes the reward corresponding to the track on which you’re the farthest 
+            from the end (this includes glory, if you use the advanced variant) from among those tracks that are available as rewards.
+            a. If 2 or more tracks tie for this, the Automa takes the one that’s topmost on your player mat.
+      </div>
     </div>
     <div class="mt-4">      
       <div class="form-check w-100">
@@ -30,6 +36,8 @@
 import AutomaScoreCards from './AutomaScoreCards.vue'
 import AutomaColor from './AutomaColor.vue'
 import AutomaCard from './AutomaCard.vue'
+import { mapGetters } from "vuex"
+
 export default {
   name: 'Council',
   props: {    
@@ -46,6 +54,9 @@ export default {
     }
   },
   computed: {
+     ...mapGetters([
+      'game',      
+    ]),
     playerVotes: {
       get() {
         return this.$store.state.currentGame.player.votes;

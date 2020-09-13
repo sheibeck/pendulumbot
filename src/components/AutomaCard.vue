@@ -5,7 +5,13 @@
       <img v-if="showCurrentAction.worker.green" class="mx-2" src="../assets/green-worker.png" />            
       <img v-if="showCurrentAction.timer.purple && !council" class="mx-2" src="../assets/purple-timer.png" />      
       <img v-if="showCurrentAction.timer.green && !council" class="mx-2" src="../assets/green-timer.png" />      
-      <img v-if="showCurrentAction.timer.black && !council" class="mx-2" src="../assets/black-timer.png" />  
+      <img v-if="showCurrentAction.timer.black && !council" class="mx-2" src="../assets/black-timer.png" />
+      <div v-if="showCurrentAction.province">
+        <div :class="{'bg-danger': showCurrentAction.province == 1}" class="bg-secondary border border-dark province m-1 p-1"></div>
+        <div :class="{'bg-danger': showCurrentAction.province == 2}" class="bg-secondary border border-dark province m-1 p-1"></div>
+        <div :class="{'bg-danger': showCurrentAction.province == 3}" class="bg-secondary border border-dark province m-1 p-1"></div>
+        <div :class="{'bg-danger': showCurrentAction.province == 4}" class="bg-secondary border border-dark province m-1 p-1"></div>
+      </div>
     </div>
     <div class="text-right">#{{showCurrentAction.id}}</div>
   </div>
@@ -48,4 +54,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .province {
+    width: 30px;
+    height: 30px;
+  }
 </style>

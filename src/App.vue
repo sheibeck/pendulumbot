@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="p-2 mt-0 bg-dark d-flex justify-content-between text-light">
-      <div>Pendulum Bot <a class="text-light" href="">?</a></div>
+      <div>Pendulum Bot <button title="Start Over" class="btn btn-link text-light p-0 m-0" @click="startOver()">&#8635;</button></div>
       <div>Round: {{round}}</div>
     </div>
 
@@ -31,6 +31,7 @@ import PlayGame from './components/PlayGame.vue'
 import Council from './components/Council.vue'
 import EndGame from './components/EndGame.vue'
 import Score from './components/Score.vue'
+import bootbox from 'bootbox';
 
 export default {
   name: 'App',
@@ -160,6 +161,27 @@ export default {
     }
   },
   methods: {
+    startOver() {
+      bootbox.confirm({
+        title: "Start Over?",
+        message: "Are you sure you want to start over? All of your progress will be lost.",
+        buttons: {
+            confirm: {
+              label: 'Yes',
+              className: 'btn-danger'
+            },
+            cancel: {
+              label: 'No',
+              className: 'btn-secondary'
+            }
+        },
+        callback: (result) => {
+          if (result) {
+            this.newGame();
+          }
+        }
+      });  
+    },
     newGame() {
       //TODO: reset the game state to it's default      
       this.game = JSON.parse(JSON.stringify(this.defaultGame));
@@ -254,8 +276,7 @@ export default {
       );
       scores.automa1.votes += this.game.automaTimerFlips + diffVotes;
       scores.automa1.score += diffScore;
-      //count points for privelege in endCouncil
-            
+                 
       //automa 2
       this.game.automa2.cards.forEach( (element) =>
         {
@@ -266,7 +287,20 @@ export default {
       );
       scores.automa2.votes += this.game.automaTimerFlips + diffVotes;
       scores.automa2.score += diffScore;
-      //count points for privelege
+      
+      //automa max score per round is 20 min score is 0
+      if (scores.automa1.score > 20) score.automa1.score = 20;
+      if (scores.automa1.score < 0) score.automa1.score = 0;
+      if (scores.automa2.score > 20) score.automa2.score = 20;
+      if (scores.automa2.score < 0) score.automa2.score = 0;
+
+      //TODO: We score right at the beginngin of the council phase instead of 
+      //      waiting to the end so user can see the score straight awat.
+      //      then we need the user to put in votes before we determine privelege
+      //      and at endCouncil we can finally score the privelege track.
+      //      This means the scores could be off by 1-2 per round
+      //      Implement a Score Council button in Council. After this is clicked
+      //      Then the end Council button can activate
 
       this.setAutomaScore = scores;
       this.setAutomaVotes = scores;
@@ -392,7 +426,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
-  margin-bottom: 60px;
+  margin-bottom: 80px;
 }
 
 html {
