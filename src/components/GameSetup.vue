@@ -8,7 +8,7 @@
       </div>      
       <div class="form-group form-check border-top border-light pt-3 w-100">
         <input type="checkbox" class="form-check-input" id="foreshadowing" v-model="foreshadowing">
-        <label class="form-check-label" for="foreshadowing">Enable Foreshadowing?</label>  
+        <label class="form-check-label" for="foreshadowing" disabled>Enable Foreshadowing?</label>  
       </div>
     </div>
     <button type="button" class="btn btn-primary m-1 w-100" @click="startGame()">Start Game</button>
