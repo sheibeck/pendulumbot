@@ -4,17 +4,13 @@
       <div>Pendulum Bot <button title="Start Over" class="btn btn-link text-light p-0 m-0" @click="startOver()">&#8635;</button></div>
       <div>Round: {{round}}</div>
     </div>
-
-    <!-- game state --> 
-    <div class="container mb-3">
-      <Score />
-    </div>
-
-    <main role="main" class="container">
+    
+    <main role="main" class="container col col-md-6">
+      <Score class="mb-2" />
       <GameSetup v-if="isSetup" />
       <PlayGame v-if="isPlaying" />
       <Council v-if="isCouncil" />
-      <EndGame v-if="isEndGame" />
+      <EndGame v-if="isEndGame" />      
     </main>
      
     <footer class='footer'>         
@@ -438,6 +434,7 @@ export default {
   color: #2c3e50;
   margin-top: 0px;
   margin-bottom: 80px;
+  font-size: 14px;
 }
 
 html {
@@ -459,5 +456,9 @@ body {
   line-height: 12px; /* Vertically center the text there */
   padding-top: 15px;
   background-color: #f5f5f5;  
+}
+
+h6 {
+  background-color: goldenrod;
 }
 </style>

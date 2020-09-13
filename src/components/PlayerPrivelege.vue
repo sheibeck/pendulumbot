@@ -1,10 +1,10 @@
 <template> 
   <div class="">
-    <div class="mr-1" v-if="!isEditing">
+    <div class="mr-1" v-if="!isEditing" @click="isEditing = true">
       <AutomaColor :id="player" /> <span>{{getPlayerLabel}}</span>
     </div>
     <div class="mr-1" v-if="isEditing">
-        COLOR PICKER
+        <button v-for="color in colors" :key="color" class="p-2" :style="{ 'background-color': color}" @click="setColor(color)">&nbsp;</button>
     </div>
     <div class="p-0 m-0">
       <span v-if="detail.id != 0"><img src="../assets/vp.png" />{{detail.score}}</span><img src="../assets/votes.png" />{{detail.votes}}      
@@ -50,6 +50,31 @@ export default {
             this.$store.commit('player', value)
             break;
         }
+      }
+    },
+    color: {
+      get() {
+        switch(this.player) {
+          case 1:
+            return this.game.automa1.color;
+          case 2:
+            return this.game.automa2.color;
+          default:
+            return this.game.player.color;
+        }
+      },
+      set(value) {
+        switch(this.player) {
+          case 1:
+            this.$set(this.$store.state.currentGame.automa1, 'color', value);
+            break;
+          case 2:
+            this.$set(this.$store.state.currentGame.automa2, 'color', value);
+            break;
+          default:
+            this.$set(this.$store.state.currentGame.player, 'color', value);
+            break;
+        }
       }      
     },
     getPlayerLabel() {
@@ -58,15 +83,15 @@ export default {
   },
   data () {
     return { 
-      isEditing: false,     
+      isEditing: false, 
+      colors: ["blue","white","black","orange","green"]    
     }
   },
-  methods: {
-    updateAutoma() {
-      if (this.automa == 1) {
-        this.detail = {};
-      }
-    }    
+  methods: {    
+    setColor(color) {
+      this.color = color;
+      this.isEditing = false;
+    }
   }
 }
 </script>

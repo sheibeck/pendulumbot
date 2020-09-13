@@ -2,7 +2,7 @@
   <div>    
     <div class="small">
       <h6>Automa 1 <AutomaColor :id="1" /></h6>
-      <div class="d-flex justify-content-between">            
+      <div class="d-flex justify-content-center">            
         <div class="mx-3 border border-secondary p-1" v-for="card in automa1ScoreCards" :key="card">
           <div class="d-flex flex-column">
             <div class="d-flex justify-content-center">
@@ -19,7 +19,7 @@
     </div>
     <div class="small mt-4">
       <h6>Automa 2 <AutomaColor :id="2" /></h6>
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-center">
         <div class="mx-3 border border-secondary p-1" v-for="card in automa2ScoreCards" :key="card">
           <div class="d-flex flex-column">
             <div class="d-flex justify-content-center">

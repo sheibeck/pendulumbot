@@ -94,7 +94,7 @@ export default {
     },
     startGame() {
       this.$parent.startGame();
-    },
+    }
   }
 }
 </script>
