@@ -5,7 +5,10 @@
       <div class="d-flex justify-content-between">            
         <div class="mx-3 border border-dark w-25" v-for="card in automa1ScoreCards" :key="card">
           <div class="d-flex flex-column">
-            <div><img src="../assets/votes.png" /> {{getCardVotes(card)}}</div>
+            <div class="d-flex justify-content-center">
+              <div><img src="../assets/vp.png" /> {{getCardScore(card)}}</div>
+              <div><img src="../assets/votes.png" /> {{getCardVotes(card)}}</div>
+            </div>
             <div>{{getCardDetails(card)}}</div>
           </div>
         </div>
@@ -16,7 +19,10 @@
       <div class="d-flex justify-content-between">
         <div class="mx-3 border border-dark w-25" v-for="card in automa2ScoreCards" :key="card">
           <div class="d-flex flex-column">
-            <div><img src="../assets/votes.png" /> {{getCardVotes(card)}}</div>
+            <div class="d-flex justify-content-center">
+              <div><img src="../assets/vp.png" /> {{getCardScore(card)}}</div>
+              <div><img src="../assets/votes.png" /> {{getCardVotes(card)}}</div>
+            </div>
             <div>{{getCardDetails(card)}}</div>
           </div>
         </div>    
@@ -47,19 +53,22 @@ export default {
     }, 
   },
   methods: {
-    getCardDetails(cardNum) {
-      var card = this.$parent.$parent.automaDeck.find(obj => {
+    getCard(cardNum) {
+      return this.$parent.$parent.automaDeck.find(obj => {
             return obj.id === cardNum;
           });
-
+    },
+    getCardDetails(cardNum) {
+      var card = this.getCard(cardNum);
       return card.council.cards[0];
     },
     getCardVotes(cardNum) {
-      var card = this.$parent.$parent.automaDeck.find(obj => {
-            return obj.id === cardNum;
-          });
-
+      var card = this.getCard(cardNum);
       return card.council.votes;
+    },
+    getCardScore(cardNum) {
+      var card = this.getCard(cardNum);
+      return card.council.vp;
     }
   }
 }

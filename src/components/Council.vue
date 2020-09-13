@@ -2,32 +2,37 @@
   <div class="d-flex flex-column">
     <h2>Council</h2> 
     <div>      
-      Enter your votes: <input type="number" v-model="playerVotes" class="text-center" style="width: 50px;" @change="updatePrivelege()" />      
-    </div>    
-    <div class="mt-4">
+      Enter your votes: <input type="number" v-model="playerVotes" class="text-center" style="width: 50px;" />      
+    </div>        
+    <div class="mt-3">      
       <AutomaScoreCards v-if="game.round < 4" />
-      <div v-if="game.round == 4">
+      <div v-if="game.round == 4" class="small">
         1. If you don’t have the legendary achievement victory point and the corresponding reward card is available, the Automa takes it.<br/>
         2. Otherwise, among the remaining council rewards, the Automa takes the reward corresponding to the track on which you’re the farthest 
             from the end (this includes glory, if you use the advanced variant) from among those tracks that are available as rewards.
-            a. If 2 or more tracks tie for this, the Automa takes the one that’s topmost on your player mat.
+            If 2 or more tracks tie for this, the Automa takes the one that’s topmost on your player mat.
       </div>
     </div>
-    <div class="mt-4">      
+    <div class="mt-3">
+        The Automa flipped the <img src="../assets/purple-timer.png" /> <span clas="h5">{{game.automaTimerFlips}}</span> times.
+    </div>
+    <div class="mt-3">
       <div class="form-check w-100">
         <input type="checkbox" id="automa1nocard" class="form-check-input" v-model="automa1DidNotTakeCard">
-        <label class="form-check-label" for="automa1nocard">Automa 1 <AutomaColor :id="1" /> did not take a card</label>  
+        <label class="form-check-label" for="automa1nocard">Did Automa 1 <AutomaColor :id="1" /> <b>not</b> take a card?</label>  
       </div>
        <div class="form-check w-100">
         <input type="checkbox" id="automa2nocard" class="form-check-input" v-model="automa2DidNotTakeCard">
-        <label class="form-check-label" for="automa2nocard">Automa 2 <AutomaColor :id="2" /> did not take a card</label>  
+        <label class="form-check-label" for="automa2nocard">Did Automa 2 <AutomaColor :id="2" /> <b>not</b> take a card?</label>  
       </div>
     </div>    
     <div class="mt-3">
       <!--TODO: Show the worker movement actions based on which card you drew -->
       <button type="button" class="btn btn-secondary m-1 w-100" @click="drawCard()">You moved <img src="../assets/any-worker.png" /> from the bottom of an action space</button>
       <AutomaCard :council="true" />
-      <button type="button" class="btn btn-primary m-1 w-100" @click="endCouncil()">End Council</button>     
+
+      <button v-if="!councilScored" type="button" class="btn btn-primary m-1 w-100" :disable="councilScored" @click="scoreCouncil()">Score Council</button>
+      <button v-if="councilScored" type="button" class="btn btn-primary m-1 w-100" :disable="!councilScored" @click="endCouncil()">End Council</button>     
     </div>
   </div>
 </template>
@@ -51,6 +56,7 @@ export default {
     return {    
       automa1DidNotTakeCard: false,
       automa2DidNotTakeCard: false,
+      councilScored: false,
     }
   },
   computed: {
@@ -75,15 +81,16 @@ export default {
     },
   },
   methods: {
+    scoreCouncil() {      
+      this.$parent.scoreRound();
+      this.councilScored = true;
+    },
     endCouncil() {       
       if (this.automa1DidNotTakeCard) this.$parent.game.automa1.score += 1;
       if (this.automa2DidNotTakeCard) this.$parent.game.automa1.score += 1;
 
       this.$parent.endCouncil();
-    },
-    updatePrivelege() {            
-      this.$parent.determinePrivelege(false);
-    },
+    },    
     drawCard() {
       this.$parent.drawCard();
     },

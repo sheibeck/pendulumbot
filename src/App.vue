@@ -245,21 +245,16 @@ export default {
       }
 
       this.setAutomaScoreCards = cards;
-
-      this.scoreRound(this.round);
-
-      //do an initial determination in case the player never needs to change their votes
-      this.determinePrivelege(false);
     },
-    scoreRound(roundNum) {
+    scoreRound() {
       let difficulty = this.difficulties.find(obj => {
           return obj.id === this.game.difficulty;
         });
       
       if (!difficulty) return;
 
-      let diffScore = eval(`difficulty.details.round${roundNum}.score`);
-      let diffVotes = eval(`difficulty.details.round${roundNum}.votes`);
+      let diffScore = eval(`difficulty.details.round${this.round}.score`);
+      let diffVotes = eval(`difficulty.details.round${this.round}.votes`);
 
       let scores = {
         automa1: { score: 0, votes: 0 },
@@ -288,22 +283,21 @@ export default {
       scores.automa2.votes += this.game.automaTimerFlips + diffVotes;
       scores.automa2.score += diffScore;
       
+      //updating score based on privelege
+      this.setAutomaVotes = scores;
+      this.determinePrivelege(false);
+      if (this.game.privelege[0] == 1) scores.automa1.score += 2;
+      if (this.game.privelege[0] == 2) scores.automa2.score += 2;
+      if (this.game.privelege[1] == 1) scores.automa1.score += 1;
+      if (this.game.privelege[1] == 2) scores.automa2.score += 1;
+
       //automa max score per round is 20 min score is 0
       if (scores.automa1.score > 20) scores.automa1.score = 20;
       if (scores.automa1.score < 0) scores.automa1.score = 0;
       if (scores.automa2.score > 20) scores.automa2.score = 20;
       if (scores.automa2.score < 0) scores.automa2.score = 0;
-
-      //TODO: We score right at the beginngin of the council phase instead of 
-      //      waiting to the end so user can see the score straight awat.
-      //      then we need the user to put in votes before we determine privelege
-      //      and at endCouncil we can finally score the privelege track.
-      //      This means the scores could be off by 1-2 per round
-      //      Implement a Score Council button in Council. After this is clicked
-      //      Then the end Council button can activate
-
       this.setAutomaScore = scores;
-      this.setAutomaVotes = scores;
+      
     },
     drawCardForAutoma(objAutoma) {
       if(this.deckIsEmpty) this.shuffleDeck();
@@ -324,7 +318,7 @@ export default {
         this.privelege = startPriv;
       }
       else {        
-        //TODO: ties go to whichever was lower
+        //ties go to whichever was lower
         let players = [{id:0, votes:this.game.player.votes}, {id:1, votes:this.game.automa1.votes}, {id:2, votes: this.game.automa2.votes}];
         players.sort(function(a, b){
             //var aVotes = a==0 ? _vmthis.game.player.votes : a==1 ? _vmthis.game.automa1.votes : _vmthis.game.automa2.votes;
@@ -353,13 +347,7 @@ export default {
 
       return array;
     },
-    endCouncil() {
-      //updating score based on privelege
-      if (this.game.privelege[0] == 1) this.game.automa1.score += 2;
-      if (this.game.privelege[0] == 2) this.game.automa2.score += 2;
-      if (this.game.privelege[1] == 1) this.game.automa1.score += 1;
-      if (this.game.privelege[1] == 2) this.game.automa2.score += 1;
-
+    endCouncil() {      
       this.nextRound();
       this.toggleCouncil();
       this.togglePlaying();
