@@ -35,7 +35,7 @@
         <label class="ml-1" :for="'difficulty'+diff.id">{{diff.name}}</label>
       </div>      
       <div class="form-group form-check border-top border-light pt-3 w-100">
-        <input type="checkbox" class="form-check-input" id="foreshadowing" v-model="foreshadowing" disabled>
+        <input type="checkbox" class="form-check-input" id="foreshadowing" v-model="foreshadowing">
         <label class="form-check-label" for="foreshadowing">Enable Foreshadowing?</label>  
       </div>
     </div>

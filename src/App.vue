@@ -177,10 +177,17 @@ export default {
         },
         callback: (result) => {
           if (result) {
-            this.newGame();
+            this.resetGame();
           }
         }
       });  
+    },
+    resetGame() {
+      this.isSetup = true;
+      this.isPlaying = false;
+      this.isCouncil = false;
+      this.isEndGame = false;
+      this.newGame(); 
     },
     newGame() {
       //TODO: reset the game state to it's default      
@@ -221,15 +228,15 @@ export default {
       else {
         this.round = newRound;
       }
-
-      this.shuffleDeck(true);
+      this.shuffleDeck(true);      
+      this.drawForeshadowingCard();      
     },
     startCouncil() {
       this.togglePlaying();
       this.toggleCouncil();
 
       this.discardCurrentCard();
-
+      
       //make sure each automa has 3 cards
       let cards = {
         automa1: this.game.automa1.cards,
@@ -245,6 +252,21 @@ export default {
       }
 
       this.setAutomaScoreCards = cards;
+
+      this.discardCurrentCard();
+    },
+    drawForeshadowingCard() {
+      //foreshadowing variant means drawing a card 
+      if (this.game.foreshadowing && this.purpleTimerFlips < 4) {
+        let cards = {
+          automa1: this.game.automa1.cards,
+          automa2: this.game.automa2.cards,
+        }
+        this.drawCardForAutoma(cards.automa1);
+        this.drawCardForAutoma(cards.automa2);
+
+        this.$parent.setAutomaScoreCards = cards;
+      }
     },
     scoreRound() {
       let difficulty = this.difficulties.find(obj => {
@@ -256,9 +278,10 @@ export default {
       let diffScore = eval(`difficulty.details.round${this.round}.score`);
       let diffVotes = eval(`difficulty.details.round${this.round}.votes`);
 
+      /* automa mat gives 1 vp as start for each scoring round */
       let scores = {
-        automa1: { score: 0, votes: 0 },
-        automa2: { score: 0, votes: 0 },
+        automa1: { score: 1, votes: 0 },
+        automa2: { score: 1, votes: 0 },
       }  
 
       //automa 1

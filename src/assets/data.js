@@ -158,7 +158,7 @@ export function deck() { return [
             council: {
                 votes: 4,
                 vp: 0,
-                cards: ["grandeworker"]
+                card: "GrandeWorker"
             }
         },
         {
@@ -175,7 +175,7 @@ export function deck() { return [
             council: {
                 votes: 3,
                 vp: 0,
-                cards: ["grandeworker"]
+                card: "GrandeWorker"
             }
         },
         {
@@ -192,7 +192,7 @@ export function deck() { return [
             council: {
                 votes: 1,
                 vp: 1,
-                cards: ["GrandeWorker"]
+                card: "GrandeWorker"
             }
         },
         {
@@ -209,7 +209,7 @@ export function deck() { return [
             council: {
                 votes: 2,
                 vp: 0,
-                cards: ["2-MilitaryCulture-TakeWorkerFromTimerRow"]
+                card: "2-MilitaryCulture-TakeWorkerFromTimerRow"
             }
         },
         {
@@ -227,7 +227,7 @@ export function deck() { return [
             council: {
                 votes: 2,
                 vp: 0,
-                cards: ["2-MilitaryCulture-TakeWorkerFromTimerRow"]
+                card: "2-MilitaryCulture-TakeWorkerFromTimerRow"
             }
         },
         {
@@ -244,7 +244,7 @@ export function deck() { return [
             council: {
                 votes: 3,
                 vp: 0,
-                cards: ["2-MilitaryCulture-TakeWorkerFromTimerRow"]
+                card: "2-MilitaryCulture-TakeWorkerFromTimerRow"
             }
         },
         {
@@ -261,7 +261,7 @@ export function deck() { return [
             council: {
                 votes: -1,
                 vp: 2,
-                cards: ["ExtraProvince"]
+                card: "ExtraProvince"
             }
         },
         {
@@ -278,7 +278,7 @@ export function deck() { return [
             council: {
                 votes: 2,
                 vp: 1,
-                cards: ["2-MilitaryCulture-TakeWorkerFromTimerRow"]
+                card: "2-MilitaryCulture-TakeWorkerFromTimerRow"
             }
         },
         {
@@ -296,7 +296,7 @@ export function deck() { return [
             council: {
                 votes: 3,
                 vp: 1,
-                cards: ["3-Military-2Votes-GainProvince"]
+                card: "3-Military-2Votes-GainProvince"
             }
         },
         {
@@ -313,7 +313,7 @@ export function deck() { return [
             council: {
                 votes: 1,
                 vp: 1,
-                cards: ["GrandeWorker"]
+                card: "GrandeWorker"
             }
         },
         {
@@ -330,7 +330,7 @@ export function deck() { return [
             council: {
                 votes: 4,
                 vp: 0,
-                cards: ["GrandeWorker"]
+                card: "GrandeWorker"
             }
         },
         {
@@ -347,7 +347,7 @@ export function deck() { return [
             council: {
                 votes: 2,
                 vp: 1,
-                cards: ["GrandeWorker"]
+                card: "GrandeWorker"
             }
         },
         {
@@ -365,7 +365,7 @@ export function deck() { return [
             council: {
                 votes: 0,
                 vp: 2,
-                cards: ["ExtraProvince"]
+                card: "ExtraProvince"
             }
         },
         {
@@ -382,7 +382,7 @@ export function deck() { return [
             council: {
                 votes: 1,
                 vp: 1,
-                cards: ["2-Money-YellowVictory"]
+                card: "2-Money-YellowVictory"
             }
         },
         {
@@ -399,7 +399,7 @@ export function deck() { return [
             council: {
                 votes: 1,
                 vp: 1,
-                cards: ["3-Military-2Votes-GainProvince"]
+                card: "3-Military-2Votes-GainProvince"
             }
         },
         {
@@ -416,7 +416,7 @@ export function deck() { return [
             council: {
                 votes: 2,
                 vp: 0,
-                cards: ["GrandeWorker"]
+                card: "GrandeWorker"
             }
         },
         {
@@ -434,7 +434,7 @@ export function deck() { return [
             council: {
                 votes: 2,
                 vp: 1,
-                cards: ["GrandeWorker"]
+                card: "GrandeWorker"
             }
         },
         {
@@ -451,7 +451,7 @@ export function deck() { return [
             council: {
                 votes: 0,
                 vp: 2,
-                cards: ["GrandeWorker"]
+                card: "GrandeWorker"
             }
         },
         {
@@ -468,7 +468,7 @@ export function deck() { return [
             council: {
                 votes: -1,
                 vp: 2,
-                cards: ["2-MilitaryCulture-TakeWorkerFromTimerRow"]
+                card: "2-MilitaryCulture-TakeWorkerFromTimerRow"
             }
         },
         {
@@ -485,7 +485,7 @@ export function deck() { return [
             council: {
                 votes: 0,
                 vp: 2,
-                cards: ["2-MilitaryCulture-TakeWorkerFromTimerRow"]
+                card: "2-MilitaryCulture-TakeWorkerFromTimerRow"
             }
         },
         {
@@ -502,7 +502,7 @@ export function deck() { return [
             council: {
                 votes: 0,
                 vp: 2,
-                cards: ["2-MilitaryCulture-TakeWorkerFromTimerRow"]
+                card: "2-MilitaryCulture-TakeWorkerFromTimerRow"
             }
         },
         {
@@ -519,7 +519,7 @@ export function deck() { return [
             council: {
                 votes: 2,
                 vp: 1,
-                cards: ["ExtraProvince"]
+                card: "ExtraProvince"
             }
         },
         {
@@ -536,7 +536,7 @@ export function deck() { return [
             council: {
                 votes: 1,
                 vp: 2,
-                cards: ["2-Money-YellowVictory"]
+                card: "2-Money-YellowVictory"
             }
         },
         {
@@ -553,7 +553,7 @@ export function deck() { return [
             council: {
                 votes: 1,
                 vp: 2,
-                cards: ["3-Military-2Votes-GainProvince"]
+                card: "3-Military-2Votes-GainProvince"
             }
         },
         {
@@ -570,7 +570,7 @@ export function deck() { return [
             council: {
                 votes: 0,
                 vp: 2,
-                cards: ["GrandeWorker"]
+                card: "GrandeWorker"
             }
         },
         {
@@ -587,7 +587,7 @@ export function deck() { return [
             council: {
                 votes: -1,
                 vp: 2,
-                cards: ["GrandeWorker"]
+                card: "GrandeWorker"
             }
         },
         {
@@ -604,7 +604,7 @@ export function deck() { return [
             council: {
                 votes: 1,
                 vp: 1,
-                cards: ["GrandeWorker"]
+                card: "GrandeWorker"
             }
         },
         {
@@ -621,7 +621,7 @@ export function deck() { return [
             council: {
                 votes: 0,
                 vp: 1,
-                cards: ["ExtraProvince"]
+                card: "ExtraProvince"
             }
         },
         {
@@ -638,7 +638,7 @@ export function deck() { return [
             council: {
                 votes: 1,
                 vp: 2,
-                cards: ["2-Money-YellowVictory"]
+                card: "2-Money-YellowVictory"
             }
         },
         {
@@ -655,7 +655,7 @@ export function deck() { return [
             council: {
                 votes: 2,
                 vp: 0,
-                cards: ["3-Military-2Votes-GainProvince"]
+                card: "3-Military-2Votes-GainProvince"
             }
         },
         {
@@ -672,7 +672,7 @@ export function deck() { return [
             council: {
                 votes: 3,
                 vp: 1,
-                cards: ["2-Money-YellowVictory"]
+                card: "2-Money-YellowVictory"
             }
         },
         {
@@ -689,7 +689,7 @@ export function deck() { return [
             council: {
                 votes: 4,
                 vp: 0,
-                cards: ["3-Military-2Votes-GainProvince"]
+                card: "3-Military-2Votes-GainProvince"
             }
         },
     ]
