@@ -289,10 +289,10 @@ export default {
       scores.automa2.score += diffScore;
       
       //automa max score per round is 20 min score is 0
-      if (scores.automa1.score > 20) score.automa1.score = 20;
-      if (scores.automa1.score < 0) score.automa1.score = 0;
-      if (scores.automa2.score > 20) score.automa2.score = 20;
-      if (scores.automa2.score < 0) score.automa2.score = 0;
+      if (scores.automa1.score > 20) scores.automa1.score = 20;
+      if (scores.automa1.score < 0) scores.automa1.score = 0;
+      if (scores.automa2.score > 20) scores.automa2.score = 20;
+      if (scores.automa2.score < 0) scores.automa2.score = 0;
 
       //TODO: We score right at the beginngin of the council phase instead of 
       //      waiting to the end so user can see the score straight awat.
