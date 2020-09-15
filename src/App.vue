@@ -264,47 +264,71 @@ export default {
         this.$parent.setAutomaScoreCards = cards;
       }
     },
-    scoreRound() {
+    setPrivelege() {
       let difficulty = this.difficulties.find(obj => {
           return obj.id === this.game.difficulty;
         });
-      
+
+      if (!difficulty) return;      
+        
+      //updating votes based on privelege
+      let votes = { automa1: { votes: 0 } , automa2: { votes: 0 } };
+      let diffVotes = eval(`difficulty.details.round${this.round}.votes`);
+
+       //automa 1
+      this.game.automa1.cards.forEach( (element) =>
+        {
+          let card = this.getCardDetails(element);          
+          votes.automa1.votes += card.council.votes;
+        }
+      );
+      votes.automa1.votes += this.game.automaTimerFlips + diffVotes;      
+                 
+      //automa 2
+      this.game.automa2.cards.forEach( (element) =>
+        {
+          let card = this.getCardDetails(element);          
+          votes.automa2.votes += card.council.votes;
+        }
+      );
+      votes.automa2.votes += this.game.automaTimerFlips + diffVotes;
+
+      this.setAutomaVotes = votes;
+      this.determinePrivelege(false);
+    },
+    scoreRound() {
+      let difficulty = this.difficulties.find(obj => {
+          return obj.id === this.game.difficulty;
+        });          
+
       if (!difficulty) return;
 
-      let diffScore = eval(`difficulty.details.round${this.round}.score`);
-      let diffVotes = eval(`difficulty.details.round${this.round}.votes`);
+      let diffScore = eval(`difficulty.details.round${this.round}.score`);      
 
       /* automa mat gives 1 vp as start for each scoring round */
       let scores = {
-        automa1: { score: 1, votes: 0 },
-        automa2: { score: 1, votes: 0 },
+        automa1: { score: 1 },
+        automa2: { score: 1 },
       }  
 
       //automa 1
       this.game.automa1.cards.forEach( (element) =>
         {
           let card = this.getCardDetails(element);
-          scores.automa1.score += card.council.vp;
-          scores.automa1.votes += card.council.votes;
+          scores.automa1.score += card.council.vp;          
         }
-      );
-      scores.automa1.votes += this.game.automaTimerFlips + diffVotes;
+      );      
       scores.automa1.score += diffScore;
                  
       //automa 2
       this.game.automa2.cards.forEach( (element) =>
         {
           let card = this.getCardDetails(element);
-          scores.automa2.score += card.council.vp;
-          scores.automa2.votes += card.council.votes;
+          scores.automa2.score += card.council.vp;          
         }
-      );
-      scores.automa2.votes += this.game.automaTimerFlips + diffVotes;
+      );      
       scores.automa2.score += diffScore;
-      
-      //updating score based on privelege
-      this.setAutomaVotes = scores;
-      this.determinePrivelege(false);
+            
       if (this.game.privelege[0] == 1) scores.automa1.score += 2;
       if (this.game.privelege[0] == 2) scores.automa2.score += 2;
       if (this.game.privelege[1] == 1) scores.automa1.score += 1;
@@ -315,8 +339,7 @@ export default {
       if (scores.automa1.score < 0) scores.automa1.score = 0;
       if (scores.automa2.score > 20) scores.automa2.score = 20;
       if (scores.automa2.score < 0) scores.automa2.score = 0;
-      this.setAutomaScore = scores;
-      
+      this.setAutomaScore = scores;      
     },
     drawCardForAutoma(objAutoma) {
       if(this.deckIsEmpty) this.shuffleDeck();
