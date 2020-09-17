@@ -56,7 +56,7 @@ export default {
 
       this.$store.commit('purpleTimerFlips');
 
-      if (this.game.purpleTimerFlips == 4) {
+      if (this.game.purpleTimerFlips == 3) {
         this.$parent.startCouncil();
       }
 

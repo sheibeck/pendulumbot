@@ -253,7 +253,7 @@ export default {
     },
     drawForeshadowingCard() {
       //foreshadowing variant means drawing a card 
-      if (this.game.foreshadowing && this.purpleTimerFlips < 4) {
+      if (this.game.foreshadowing && this.purpleTimerFlips < 3) {
         let cards = {
           automa1: this.game.automa1.cards,
           automa2: this.game.automa2.cards,
