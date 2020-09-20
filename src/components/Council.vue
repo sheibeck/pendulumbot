@@ -31,30 +31,38 @@
               </ol>
             </div>
           </div>    
-        </div>
+        </div>        
         <div class="mt-2">
           3. <button type="button" class="btn btn-primary m-1 btn-sm" :disabled="councilScored || !privelegeSet" @click="scoreAutomas()">Score Automas</button>
           <ul class="mb-0">
             <li>The Automa flipped the <img src="../assets/purple-timer.png" /> <span clas="h5">{{game.automaTimerFlips}}</span> times</li>
           </ul>    
         </div>
-        <div class="mt-1">4. Check max provinces</div>
-        <div class="mt-2">5. Setup for new round
-          <ul class="mb-1">            
-            <li>Clear and set reward cards</li>
-            <li>Clear and set new provinces</li>
-            <li>Draw new achievement</li>
-            <li>Reset purple timer tokens</li>
-          </ul>
+        <div v-if="game.round < 4" class="mt-3">
+          <div class="mt-1">4. Check max provinces</div>
+          <div class="mt-2">5. Setup for new round
+            <ul class="mb-1">            
+              <li>Clear and set reward cards</li>
+              <li>Clear and set new provinces</li>
+              <li>Draw new achievement</li>
+              <li>Reset purple timer tokens</li>
+            </ul>
+          </div>
+          <div class="mt-0">6. Place and/or move workers</div>
+          <button type="button" class="btn btn-secondary m-1 mt-2 w-100" @click="drawCard()">You moved <img src="../assets/any-worker.png" /> from the bottom of an action space</button>          
+          <div class="mt-2">7. Flip <img src="../assets/purple-timer.png" /><img src="../assets/green-timer.png" /><img src="../assets/black-timer.png" />, then click the <u>End Council</u> button and begin play</div>
         </div>
-        <div class="mt-0">6. Place and/or move workers</div>
-        
       </div>
 
-      <button type="button" class="btn btn-secondary m-1 mt-2 w-100" @click="drawCard()">You moved <img src="../assets/any-worker.png" /> from the bottom of an action space</button>
-      <AutomaCard :council="true" />
-      
-      <button type="button" class="btn btn-primary m-1 w-100" :disabled="!councilScored || !privelegeSet" @click="endCouncil()">End Council</button>     
+      <div v-if="game.round < 4" class="pt-2">        
+        <AutomaCard :council="true" />        
+        <button type="button" class="btn btn-primary m-1 w-100" :disabled="!councilScored || !privelegeSet" @click="endCouncil()">End Council</button>
+      </div>
+      <div v-if="game.round == 4" class="text-left">
+        <div class="my-3">4. Enter your final score: <input type="number" v-model="playerScore" class="text-center" style="width: 60px;" /></div>
+        <button type="button" class="btn btn-primary m-1 w-100" :disabled="!councilScored || !privelegeSet" @click="endCouncil()">End Council</button>
+      </div>
+
     </div>
   </div>
 </template>

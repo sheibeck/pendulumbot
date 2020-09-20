@@ -6,11 +6,11 @@
     </div>
     
     <main role="main" class="container col col-md-6">
-      <Score class="mb-2" />
+      <Score v-if="!isEndGame" class="mb-2" />
       <GameSetup v-if="isSetup" />
       <PlayGame v-if="isPlaying" />
       <Council v-if="isCouncil" />
-      <EndGame v-if="isEndGame" />      
+      <EndGame v-if="isEndGame" />
     </main>
      
     <footer class='footer'>         
