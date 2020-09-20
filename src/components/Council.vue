@@ -38,7 +38,7 @@
             <li>The Automa flipped the <img src="../assets/purple-timer.png" /> <span clas="h5">{{game.automaTimerFlips}}</span> times</li>
           </ul>    
         </div>
-        <div v-if="game.round < 4" class="mt-3">
+        <div v-if="game.round < 4" class="mt-1 w-100">
           <div class="mt-1">4. Check max provinces</div>
           <div class="mt-2">5. Setup for new round
             <ul class="mb-1">            
@@ -49,13 +49,13 @@
             </ul>
           </div>
           <div class="mt-0">6. Place and/or move workers</div>
-          <button type="button" class="btn btn-secondary m-1 mt-2 w-100" @click="drawCard()">You moved <img src="../assets/any-worker.png" /> from the bottom of an action space</button>          
+          <button type="button" class="btn btn-secondary m-1 mt-2 w-100" @click="drawCard()">You moved <img src="../assets/any-worker.png" /> from the bottom of an action space</button>
+          <AutomaCard :council="true" />
           <div class="mt-2">7. Flip <img src="../assets/purple-timer.png" /><img src="../assets/green-timer.png" /><img src="../assets/black-timer.png" />, then click the <u>End Council</u> button and begin play</div>
         </div>
       </div>
 
       <div v-if="game.round < 4" class="pt-2">        
-        <AutomaCard :council="true" />        
         <button type="button" class="btn btn-primary m-1 w-100" :disabled="!councilScored || !privelegeSet" @click="endCouncil()">End Council</button>
       </div>
       <div v-if="game.round == 4" class="text-left">
@@ -139,7 +139,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   img {
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
   }  
 </style>

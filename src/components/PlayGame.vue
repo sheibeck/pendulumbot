@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column align-items-center">
     <h4>Playing <img class="img-sm" src="../assets/purple-timer.png" />:{{purpleTimerFlips}}</h4>   
-    <div class="d-flex flex-column mb-3">
+    <div class="d-flex flex-column mb-3 col">
       <button type="button" class="btn btn-secondary m-1" @click="drawCard()">You moved <img class="img-sm" src="../assets/any-worker.png" /> from the bottom of an action space</button>
       <button type="button" class="btn btn-secondary m-1" @click="drawCard()">The <img class="img-sm" src="../assets/purple-timer.png" /> timer is out and you flipped <img class="img-sm" src="../assets/black-timer.png" /> or <img class="img-sm" src="../assets/green-timer.png" /> </button>
       <div class="d-flex justify-content-between">

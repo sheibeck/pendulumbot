@@ -1,5 +1,5 @@
 <template>
-  <div>    
+  <div class="">    
     <div class="small">
       <h6>Automa 1 <AutomaColor :id="1" /></h6>
       <div class="d-flex justify-content-center">            

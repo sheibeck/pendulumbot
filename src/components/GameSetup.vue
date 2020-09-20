@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="col">
     <h4>Game Setup</h4>
         
     <!-- purple starting worker -->
@@ -39,7 +39,7 @@
         <label class="form-check-label" for="foreshadowing">Enable Foreshadowing?</label>  
       </div>
     </div>
-
+    <div class="mt-2">Flip <img src="../assets/purple-timer.png" /><img src="../assets/green-timer.png" /><img src="../assets/black-timer.png" />, then click the <u>Start Game</u> button and begin play</div>
     <button type="button" class="btn btn-primary m-1 w-100" @click="startGame()">Start Game</button>
   </div>
 </template>
