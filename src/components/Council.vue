@@ -10,8 +10,8 @@
         </div>
         <div>2. Claim rewards in privelege order</div>  
         <div class="w-100 mr-0">              
-          <div class="mt-1 w-100" v-if="game.round < 4">
-            <AutomaScoreCards v-if="game.round < 4" />
+          <AutomaScoreCards />
+          <div class="mt-1 w-100" v-if="game.round < 4">            
             <div class="form-check mt-3 ml-3">
               <input type="checkbox" id="automa1nocard" class="form-check-input" v-model="automa1DidNotTakeCard">
               <label class="form-check-label" for="automa1nocard">Did Automa 1 <AutomaColor :id="1" /> <b>not</b> take a card?</label>  

@@ -9,11 +9,11 @@
               <div><img class="sm-img" src="../assets/vp.png" /> {{getCardScore(card)}}</div>
               <div><img class="sm-img" src="../assets/votes.png" /> {{getCardVotes(card)}}</div>
             </div>
-            <div><img class="card-img img-fluid img-thumbnail" :src="getCardDetails(card)"/></div>
+            <div class="mt-1" v-if="game.round < 4"><img class="card-img img-fluid img-thumbnail" :src="getCardDetails(card)"/></div>
           </div>
-          <small>
+          <div class="w-100 text-center mt-1">
             #{{card}}
-          </small>
+          </div>
         </div>
       </div>   
     </div>
@@ -26,11 +26,11 @@
               <div><img class="sm-img" src="../assets/vp.png" /> {{getCardScore(card)}}</div>
               <div><img class="sm-img" src="../assets/votes.png" /> {{getCardVotes(card)}}</div>
             </div>
-            <div><img class="card-img img-fluid img-thumbnail" :src="getCardDetails(card)"/></div>
+            <div class="mt-1" v-if="game.round < 4"><img class="card-img img-fluid img-thumbnail" :src="getCardDetails(card)"/></div>
           </div>
-          <small>
+          <div class="w-100 text-center mt-1">
             #{{card}}
-          </small>
+          </div>
         </div>
       </div>
     </div>
@@ -44,6 +44,7 @@ import ExtraProvince from '../assets/ExtraProvince.png'
 import MoneyForYellowVictory from '../assets/2-Money-YellowVictory.png'
 import MilitaryVotesForProvince from '../assets/3-Military-2Votes-GainProvince.png'
 import MilitaryCultureForWorker from '../assets/2-MilitaryCulture-TakeWorkerFromTimerRow.png'
+import { mapGetters } from "vuex"
     
 export default {
   name: 'AutomaScoreCards',
@@ -62,6 +63,9 @@ export default {
     AutomaColor
   },
   computed: {
+    ...mapGetters([
+      'game',      
+    ]),
     automa1ScoreCards() {
       return this.$store.state.currentGame.automa1.cards;
     },
