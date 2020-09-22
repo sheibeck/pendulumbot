@@ -39,6 +39,12 @@ export default {
     Score,
   },
   created() {
+    if (this.$workbox) {
+      this.$workbox.addEventListener("waiting", () => {
+        this.showUpdateUI = true;
+      });
+    }
+    
     this.newGame();
   },
   computed: {
