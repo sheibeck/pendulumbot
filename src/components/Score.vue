@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="small">Privelege &rarr;</div>
+    <div class="small">(Difficulty: {{game.difficulty}} ) Privelege &rarr;</div>
     <div class="d-flex justify-content-between pb-2 border-bottom border-dark">
       <PlayerPrivelege v-for="id in privelege" :key="id" class="" :player="id" />
     </div>
@@ -20,7 +20,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'privelege'
+      'privelege',
+      'game'
     ]),
   },
   data () {

@@ -304,11 +304,10 @@ export default {
       if (!difficulty) return;
 
       let diffScore = eval(`difficulty.details.round${this.round}.score`);      
-
-      /* automa mat gives 1 vp as start for each scoring round */
+      
       let scores = {
-        automa1: { score: 1 },
-        automa2: { score: 1 },
+        automa1: { score: 0 },
+        automa2: { score: 0 },
       }  
 
       //automa 1

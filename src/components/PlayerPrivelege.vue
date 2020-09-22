@@ -7,7 +7,7 @@
         <button v-for="color in colors" :key="color" class="p-2" :style="{ 'background-color': color}" @click="setColor(color)">&nbsp;</button>
     </div>
     <div class="p-0 m-0">
-      <span v-if="detail.id != 0 || game.round == 4"><img src="../assets/vp.png" />{{detail.score}}</span><img src="../assets/votes.png" />{{detail.votes}}      
+      <span v-if="detail.id != 0 || game.round == 4"><img src="../assets/vp.png" />{{detail.scoreDisplay}}</span><img src="../assets/votes.png" />{{detail.votes}}      
     </div>
   </div>    
 </template>

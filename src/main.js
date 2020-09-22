@@ -41,7 +41,8 @@ const store = new Vuex.Store({
       automa1: {
         id: 1,
         color: "orange",
-        score: -22,
+        score: -30,
+        scoreDisplay: -16,
         votes: 0,
         grandeWorker: false,
         cards: []
@@ -49,7 +50,8 @@ const store = new Vuex.Store({
       automa2: {
         id: 2,
         color: "white",
-        score: -22,
+        score: -30,
+        scoreDisplay: -16,
         votes: 0,
         grandeWorker: false,
         cards: []
@@ -109,8 +111,50 @@ const store = new Vuex.Store({
       Vue.set(state.currentGame.automa2, 'cards', [...payload.automa2]);
     },
     setAutomaScore (state, payload) {
+      let scoreMatrix = {
+        "-16": [-30,-31],
+        "-15": [-28,-29],
+        "-14": [-26,-27],
+        "-13": [-24,-25],
+        "-12": [-22,-23],
+        "-11": [-20,-21],
+        "-10": [-18,-19],
+        "-9": [-16,-17],
+        "-8": [-15,-14],
+        "-7": [-12,-13],
+        "-6": [-10,-11],
+        "-5": [-8,-9],
+        "-4": [-6,-7],
+        "-3": [-4,-5],
+        "-2": [-2,-3],
+        "-1": [0,-1],
+      }
+      
       state.currentGame.automa1.score += payload.automa1.score;
+
+      if (state.currentGame.automa1.score <= 0) {
+        for (const [key, value] of Object.entries(scoreMatrix)) {
+          if (value.includes(state.currentGame.automa1.score)) {
+            state.currentGame.automa1.scoreDisplay = parseInt(key);
+          }
+        }
+      }
+      else {
+        state.currentGame.automa1.scoreDisplay = state.currentGame.automa1.score;
+      }
+
       state.currentGame.automa2.score += payload.automa2.score;
+      if (state.currentGame.automa2.score <= 0) {
+        for (const [key, value] of Object.entries(scoreMatrix)) {
+          if (value.includes(state.currentGame.automa2.score)) {
+            state.currentGame.automa2.scoreDisplay = parseInt(key);
+          }
+        }
+      }
+      else {
+        state.currentGame.automa2.scoreDisplay = state.currentGame.automa2.score;
+      }
+
     },
     setAutomaVotes (state, payload) {
       state.currentGame.automa1.votes = payload.automa1.votes;

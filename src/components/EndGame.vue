@@ -1,12 +1,12 @@
 <template>
   <div>
     <h2>Game Over</h2>
-
+    <h4>Difficulty: {{game.difficulty}}</h4>
     <div>
       <div v-for="thing in finalScore" :key="thing.id">
         <div class="d-flex justify-content-center py-4">
           <AutomaColor :id="thing.id" class="mt-2 mr-1" /> <h4 v-if="thing.id==0" class="mt-2">You</h4><h4 v-else class="mt-2">Automa {{thing.id}}</h4>
-          <img class="sm-img mx-2" src="../assets/vp.png" /><h4 class="mt-2">{{thing.score}}</h4>
+          <img class="sm-img mx-2" src="../assets/vp.png" /><h4 class="mt-2">{{thing.scoreDisplay || thing.score}}</h4>
         </div>
       </div>
     </div>
