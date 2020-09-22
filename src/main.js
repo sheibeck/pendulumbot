@@ -9,6 +9,22 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import {deck} from './assets/data'
 import {difficulties} from './assets/data'
+import * as Sentry from "@sentry/browser";
+import { Vue as VueIntegration } from "@sentry/integrations";
+import { Integrations } from "@sentry/tracing";
+
+Sentry.init({
+  dsn: "https://7e70848b69f74f31901fa0ac48209780@o302915.ingest.sentry.io/5437673",
+  integrations: [
+    new VueIntegration({
+      Vue,
+      tracing: true,
+      logErrors: true
+    }),
+    new Integrations.BrowserTracing(),
+  ],
+  tracesSampleRate: 1,
+});
 
 Amplify.configure(aws_exports);
 Vue.use(Vuex)
