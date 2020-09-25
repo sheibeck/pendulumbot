@@ -12,6 +12,9 @@ import {difficulties} from './assets/data'
 import * as Sentry from "@sentry/browser";
 import { Vue as VueIntegration } from "@sentry/integrations";
 import { Integrations } from "@sentry/tracing";
+import wb from "./registerServiceWorker";
+
+Vue.prototype.$workbox = wb;
 
 Sentry.init({
   dsn: "https://7e70848b69f74f31901fa0ac48209780@o302915.ingest.sentry.io/5437673",
