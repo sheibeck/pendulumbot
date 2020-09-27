@@ -390,16 +390,23 @@ export default {
         this.privelege = startPriv;
       }
       else {        
-        //ties go to whichever was lower
-        let players = [{id:0, votes:this.game.player.votes}, {id:1, votes:this.game.automa1.votes}, {id:2, votes: this.game.automa2.votes}];
-        players.sort(function(a, b){
-            //var aVotes = a==0 ? _vmthis.game.player.votes : a==1 ? _vmthis.game.automa1.votes : _vmthis.game.automa2.votes;
-            //var bVotes = b==0 ? _vmthis.game.player.votes : b==1 ? _vmthis.game.automa1.votes : _vmthis.game.automa2.votes;
-            if (a.votes < b.votes || a.votes === b.votes) return 1;
-            return -1;
-        });        
-        this.privelege = [players[0].id, players[1].id, players[2].id];
+        let players = [{id:0, votes:this.game.player.votes}, {id:1, votes:this.game.automa1.votes}, {id:2, votes: this.game.automa2.votes}];        
+        this.privelege = this.getPrivelegeOrder(players, this.privelege);
       }
+    },
+    getPrivelegeOrder(players, lastPrivelege) {
+      players.sort(function(a, b){
+          if (a.votes < b.votes) return 1;            
+          //ties go to whoever was lower in the last round
+          if (a.votes === b.votes) {
+            let prevA = lastPrivelege.findIndex( (player) => player == a.id);
+            let prevB = lastPrivelege.findIndex( (player) => player == b.id);
+            if (prevA < prevB) return 1;
+          }
+          return -1;
+      });        
+      var newPrivelege = [players[0].id, players[1].id, players[2].id];
+      return newPrivelege;
     },
     shuffle(array) {
       var currentIndex = array.length, temporaryValue, randomIndex;
