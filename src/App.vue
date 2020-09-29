@@ -64,6 +64,10 @@ export default {
         this.prompt = true;
       });      
     }
+
+    window.addEventListener("beforeunload", (e) => {                       
+      e.returnValue = 'Are you sure you want to quite your game?';
+    });
     
     this.newGame();
   },
@@ -183,7 +187,7 @@ export default {
       prompt: false
     }
   },
-  methods: {
+  methods: {   
     async update() {
       this.prompt = false;
       await this.$workbox.messageSW({ type: "SKIP_WAITING" });
